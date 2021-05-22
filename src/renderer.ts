@@ -26,6 +26,13 @@
  * ```
  */
 
-import './index.css';
+import { createApp, h } from 'vue'
+import App from './App.vue'
 
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+const app = createApp({
+    render() {
+        return h(App)
+    }
+})
+
+app.mount('#app')
