@@ -33,7 +33,7 @@ const createWindow = async () => {
   });
 
   // and load the index.html of the app.
-  await mainWindow.loadURL(`${MAIN_WINDOW_WEBPACK_ENTRY}?file=${file}`);
+  await mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   const buffer = readChunk.sync(file, 0, 4100)
   const fileType = await FileType.fromBuffer(buffer)
