@@ -27,8 +27,9 @@
  */
 
 import { createApp, h } from 'vue'
-import App from './App.vue'
 import './base.css'
+import './assets/fonts/iconfont.css'
+import App from './App.vue'
 
 const app = createApp({
     render() {

@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2567059 */
+  src: url('iconfont.woff2?t=1621836400682') format('woff2'),
+       url('iconfont.woff?t=1621836400682') format('woff'),
+       url('iconfont.ttf?t=1621836400682') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: inherit;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-left:before {
+  content: "\e605";
+}
+
+.icon-arrow-right:before {
+  content: "\e60b";
+}
+
+.icon-flip-vertical:before {
+  content: "\e717";
+}
+
+.icon-flip-horizontal:before {
+  content: "\e718";
+}
+
+.icon-fullscreen:before {
+  content: "\e73c";
+}
+
+.icon-fullscreen-exit:before {
+  content: "\e73e";
+}
+
+.icon-info:before {
+  content: "\e745";
+}
+
+.icon-move:before {
+  content: "\e7a9";
+}
+
+.icon-moonfill:before {
+  content: "\e7b9";
+}
+
+.icon-rotate-right:before {
+  content: "\e811";
+}
+
+.icon-search:before {
+  content: "\e825";
+}
+
+.icon-spinner:before {
+  content: "\e853";
+}
+
+.icon-sunfill:before {
+  content: "\e876";
+}
+
+.icon-rotate-left:before {
+  content: "\e8a4";
+}
+
+.icon-zoom-in:before {
+  content: "\e8d9";
+}
+
+.icon-zoom-out:before {
+  content: "\e8da";
+}

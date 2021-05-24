@@ -14,6 +14,10 @@ rules.push(
     test: /\.vue$/,
     loader: 'vue-loader',
   },
+  {
+    test: /\.(ttf|woff2?|svg)$/,
+    loader: 'file-loader'
+  }
 );
 
 module.exports = {

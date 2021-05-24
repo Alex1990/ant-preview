@@ -2991,6 +2991,14 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-loader@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.nlark.com/file-loader/download/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
+  integrity sha1-uu98+OGEDfMl5DkLRISHlIDuvk0=
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+
 file-type@^16.4.0:
   version "16.4.0"
   resolved "https://registry.nlark.com/file-type/download/file-type-16.4.0.tgz?cache=0&sync_timestamp=1620212346840&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffile-type%2Fdownload%2Ffile-type-16.4.0.tgz#464197e44bd94a452d77b09085d977ae0dad2df4"
