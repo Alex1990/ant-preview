@@ -2,10 +2,12 @@
     <div class="background">
         <img :src="url" class="image" />
     </div>
+    <Toolbar />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import Toolbar from './components/Toolbar.vue'
 
 interface VFile {
     path: string
@@ -14,6 +16,9 @@ interface VFile {
 }
 
 export default defineComponent({
+    components: {
+        Toolbar
+    },
     setup() {
         const url = ref('')
         window.electron.ipcRenderer.on('open', (file: VFile) => {
