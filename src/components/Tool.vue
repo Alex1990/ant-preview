@@ -45,8 +45,7 @@ export default defineComponent({
     transition: background .1s ease-in;
 }
 
-.tool:hover,
-.tool:focus {
+.tool:hover {
     background: rgba(0,0,0,.3);
     transition: background .1s ease-in;
 }
