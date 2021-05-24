@@ -36,3 +36,17 @@ const app = createApp({
 })
 
 app.mount('#app')
+
+interface VFile {
+    path: string
+    mime: string
+    data: Uint8Array
+}
+
+window.electron.ipcRenderer.on('open', (file: VFile) => {
+    const blob = new Blob([file.data.buffer], { type: file.mime })
+    const url = URL.createObjectURL(blob)
+    const img = new Image()
+    img.src = url
+    document.body.appendChild(img)
+})
