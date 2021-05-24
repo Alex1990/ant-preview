@@ -1,12 +1,11 @@
 <template>
-    <div class="background">
-        <img :src="url" class="image" />
-    </div>
+    <ViewArea :src="url" />
     <Toolbar />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import ViewArea from './components/ViewArea.vue'
 import Toolbar from './components/Toolbar.vue'
 
 interface VFile {
@@ -17,6 +16,7 @@ interface VFile {
 
 export default defineComponent({
     components: {
+        ViewArea,
         Toolbar
     },
     setup() {
@@ -31,12 +31,3 @@ export default defineComponent({
     }
 })
 </script>
-
-<style scoped>
-.background {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-</style>

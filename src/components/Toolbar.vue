@@ -4,8 +4,10 @@
             <Tool
                 v-for="tool in tools"
                 :key="tool.icon"
+                :name="tool.name"
                 :icon="tool.icon"
                 :title="tool.title"
+                @click="onToolClick"
             />
         </div>
     </div>
@@ -13,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import Tool from './Tool.vue'
 
 export default defineComponent({
@@ -22,32 +25,63 @@ export default defineComponent({
     setup() {
         const tools = ref([
             {
-                icon: 'rotate-left',
-                title: 'Rotate left by 90°'
+                name: 'rotateLeft',
+                title: 'Rotate left by 90°',
+                icon: 'rotate-left'
             },
             {
-                icon: 'rotate-right',
-                title: 'Rotate right by 90°'
+                name: 'rotateRight',
+                title: 'Rotate right by 90°',
+                icon: 'rotate-right'
             },
             {
-                icon: 'flip-vertical',
-                title: 'Flip vertically'
+                name: 'flipVertical',
+                title: 'Flip vertically',
+                icon: 'flip-vertical'
             },
             {
-                icon: 'flip-horizontal',
-                title: 'Flip horizontally'
+                name: 'flipHorizontal',
+                title: 'Flip horizontally',
+                icon: 'flip-horizontal'
             },
             {
-                icon: 'search',
-                title: 'Magnifier'
+                name: 'mgnifier',
+                title: 'Magnifier',
+                icon: 'search'
             },
             {
-                icon: 'info',
-                title: 'Image properties'
+                name: 'zoomOut',
+                title: 'Zoom out',
+                icon: 'zoom-out'
+            },
+            {
+                name: 'zoomIn',
+                title: 'Zoom in',
+                icon: 'zoom-in'
+            },
+            {
+                name: 'inspector',
+                title: 'View image properties',
+                icon: 'info'
             }
         ])
+        const store = useStore()
+        const onToolClick = (name: string) => {
+            console.log(name)
+            switch (name) {
+                case 'zoomIn':
+                    store.commit('zoomIn')
+                    break
+                case 'zoomOut':
+                    store.commit('zoomOut')
+                    break
+                default:
+                    console.error('unknown command')
+            }
+        }
         return {
-            tools
+            tools,
+            onToolClick,
         }
     }
 })

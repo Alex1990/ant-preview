@@ -1,5 +1,5 @@
 <template>
-    <button class="tool" :title="title">
+    <button class="tool" :title="title" @click="onClick(name)">
         <Icon :name="icon" />
     </button>
 </template>
@@ -13,8 +13,20 @@ export default defineComponent({
         Icon
     },
     props: {
+        name: String,
         title: String,
         icon: String
+    },
+    emits: {
+        click: null
+    },
+    setup(props, ctx) {
+        const onClick = (name: string) => {
+            ctx.emit('click', name)
+        }
+        return {
+            onClick
+        }
     }
 })
 </script>
