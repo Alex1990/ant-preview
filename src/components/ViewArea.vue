@@ -32,7 +32,6 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #ddd;
 }
 
 .image {
