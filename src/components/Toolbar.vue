@@ -45,8 +45,8 @@ export default defineComponent({
                 icon: 'flip-horizontal'
             },
             {
-                name: 'mgnifier',
-                title: 'Magnifier',
+                name: 'resetZoom',
+                title: 'Reset zoom',
                 icon: 'search'
             },
             {
@@ -80,6 +80,9 @@ export default defineComponent({
                     break
                 case 'flipHorizontal':
                     store.commit('flipHorizontal')
+                    break
+                case 'resetZoom':
+                    store.commit('resetZoom')
                     break
                 case 'zoomOut':
                     store.commit('zoomOut')

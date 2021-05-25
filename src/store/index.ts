@@ -27,6 +27,11 @@ const store = createStore<State>({
         rotate: 0
     },
     mutations: {
+        resetZoom(state) {
+            const { scale } = state
+            const [x, y] = scale
+            return state.scale = [Math.sign(x), Math.sign(y)]
+        },
         zoomIn(state) {
             const { scaleRatios, scale } = state
             const [x, y] = scale
