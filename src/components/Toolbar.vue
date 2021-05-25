@@ -15,85 +15,52 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
+import { Store, useStore } from 'vuex'
 import Tool from './Tool.vue'
+import useTools from '../uses/useTools'
+import { State } from '../store'
+
+const handleCommand = (store: Store<State>, name: string) => {
+    switch (name) {
+        case 'rotateLeft':
+            store.commit('rotateLeft')
+            break
+        case 'rotateRight':
+            store.commit('rotateRight')
+            break
+        case 'flipVertical':
+            store.commit('flipVertical')
+            break
+        case 'flipHorizontal':
+            store.commit('flipHorizontal')
+            break
+        case 'resetZoom':
+            store.commit('resetZoom')
+            break
+        case 'zoomOut':
+            store.commit('zoomOut')
+            break
+        case 'zoomIn':
+            store.commit('zoomIn')
+            break
+        default:
+            console.error('unknown command')
+    }
+}
 
 export default defineComponent({
     components: {
         Tool
     },
     setup() {
-        const tools = ref([
-            {
-                name: 'rotateLeft',
-                title: 'Rotate left by 90°',
-                icon: 'rotate-left'
-            },
-            {
-                name: 'rotateRight',
-                title: 'Rotate right by 90°',
-                icon: 'rotate-right'
-            },
-            {
-                name: 'flipVertical',
-                title: 'Flip vertically',
-                icon: 'flip-vertical'
-            },
-            {
-                name: 'flipHorizontal',
-                title: 'Flip horizontally',
-                icon: 'flip-horizontal'
-            },
-            {
-                name: 'resetZoom',
-                title: 'Reset zoom',
-                icon: 'search'
-            },
-            {
-                name: 'zoomOut',
-                title: 'Zoom out',
-                icon: 'zoom-out'
-            },
-            {
-                name: 'zoomIn',
-                title: 'Zoom in',
-                icon: 'zoom-in'
-            },
-            {
-                name: 'inspector',
-                title: 'View image properties',
-                icon: 'info'
-            }
-        ])
+        const tools = useTools()
         const store = useStore()
         const onToolClick = (name: string) => {
-            console.log(name)
-            switch (name) {
-                case 'rotateLeft':
-                    store.commit('rotateLeft')
-                    break
-                case 'rotateRight':
-                    store.commit('rotateRight')
-                    break
-                case 'flipVertical':
-                    store.commit('flipVertical')
-                    break
-                case 'flipHorizontal':
-                    store.commit('flipHorizontal')
-                    break
-                case 'resetZoom':
-                    store.commit('resetZoom')
-                    break
-                case 'zoomOut':
-                    store.commit('zoomOut')
-                    break
-                case 'zoomIn':
-                    store.commit('zoomIn')
-                    break
-                default:
-                    console.error('unknown command')
-            }
+            handleCommand(store, name)
         }
+        window.electron.ipcRenderer.on('menuItem', (id: string) => {
+            handleCommand(store, id)
+        })
         return {
             tools,
             onToolClick,

@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron';
 import readChunk from 'read-chunk'
 import FileType from 'file-type'
 import isSvg from 'is-svg'
+import './setMenu.ts'
 
 const fsp = fs.promises
 
