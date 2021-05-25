@@ -43,6 +43,7 @@ export default defineComponent({
     border: 0;
     color: inherit;
     transition: background .1s ease-in;
+    outline: none;
 }
 
 .tool:hover {
