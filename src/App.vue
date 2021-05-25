@@ -23,6 +23,9 @@ export default defineComponent({
         const url = ref('')
         window.electron.ipcRenderer.on('open', (file: VFile) => {
             const blob = new Blob([file.data.buffer], { type: file.mime })
+            if (url.value) {
+                URL.revokeObjectURL(url.value)
+            }
             url.value = URL.createObjectURL(blob)
         })
         return {

@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, MenuItem, MenuItemConstructorOptions } from 'electron'
+import openFileDialog from './utils/openFileDialog'
 
 
 const isMac = process.platform === 'darwin'
@@ -27,6 +28,14 @@ const template = [
   {
     label: 'File',
     submenu: [
+      {
+        id: 'openFile',
+        label: 'Open File',
+        accelerator: isMac ? 'Cmd+O' : 'Ctrl+O',
+        click(item: MenuItem, focusedWindow: BrowserWindow) {
+          openFileDialog(focusedWindow)
+        }
+      },
       isMac ? { role: 'close' } : { role: 'quit' }
     ]
   },
