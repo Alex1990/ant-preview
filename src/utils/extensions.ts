@@ -1,0 +1,1 @@
+export default ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'avif']
