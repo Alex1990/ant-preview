@@ -69,11 +69,23 @@ export default defineComponent({
         const onToolClick = (name: string) => {
             console.log(name)
             switch (name) {
-                case 'zoomIn':
-                    store.commit('zoomIn')
+                case 'rotateLeft':
+                    store.commit('rotateLeft')
+                    break
+                case 'rotateRight':
+                    store.commit('rotateRight')
+                    break
+                case 'flipVertical':
+                    store.commit('flipVertical')
+                    break
+                case 'flipHorizontal':
+                    store.commit('flipHorizontal')
                     break
                 case 'zoomOut':
                     store.commit('zoomOut')
+                    break
+                case 'zoomIn':
+                    store.commit('zoomIn')
                     break
                 default:
                     console.error('unknown command')

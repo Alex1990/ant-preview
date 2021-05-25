@@ -15,7 +15,9 @@ export default defineComponent({
     setup() {
         const store = useStore()
         const style = computed(() => {
-            return `transform: scale(${store.state.scale})`
+            const { scale, rotate } = store.state
+            const [x, y] = scale
+            return `transform: scale(${x},${y}) rotate(${rotate}deg)`
         })
         return {
             style

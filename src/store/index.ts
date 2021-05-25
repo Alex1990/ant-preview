@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export interface State {
     scaleRatios: number[]
-    scale: number
+    scale: [number, number]
+    rotate: number
 }
 
 const store = createStore<State>({
@@ -22,22 +23,47 @@ const store = createStore<State>({
             8,
             16
         ],
-        scale: 1
+        scale: [1, 1],
+        rotate: 0
     },
     mutations: {
         zoomIn(state) {
             const { scaleRatios, scale } = state
-            const index = scaleRatios.findIndex(scaleRatio => scale === scaleRatio)
+            const [x, y] = scale
+            const ratio = Math.abs(x)
+            const index = scaleRatios.findIndex(scaleRatio => ratio === scaleRatio)
             if (index < scaleRatios.length - 1) {
-                state.scale  = scaleRatios[index + 1]
+                const nextRatio = scaleRatios[index + 1]
+                state.scale = [Math.sign(x) * nextRatio, Math.sign(y) * nextRatio]
             }
         },
         zoomOut(state) {
             const { scaleRatios, scale } = state
-            const index = scaleRatios.findIndex(scaleRatio => scale === scaleRatio)
+            const [x, y] = scale
+            const ratio = Math.abs(x)
+            const index = scaleRatios.findIndex(scaleRatio => ratio === scaleRatio)
             if (index > 0) {
-                state.scale  = scaleRatios[index - 1]
+                const nextRatio = scaleRatios[index - 1]
+                state.scale = [Math.sign(x) * nextRatio, Math.sign(y) * nextRatio]
             }
+        },
+        rotateLeft(state) {
+            const { rotate } = state
+            state.rotate = rotate > 0 ? rotate - 90 : 270
+        },
+        rotateRight(state) {
+            const { rotate } = state
+            state.rotate = rotate < 270 ? rotate + 90 : 0
+        },
+        flipVertical(state) {
+            const { scale } = state
+            const [x, y] = scale
+            state.scale = [x, -y]
+        },
+        flipHorizontal(state) {
+            const { scale } = state
+            const [x, y] = scale
+            state.scale = [-x, y]
         }
     }
 })

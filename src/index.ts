@@ -17,7 +17,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-let file = '/Users/chaoalex/Documents/logo.svg'
+let file = '/Users/chaoalex/Documents/picky.png'
 
 const createWindow = async () => {
   // Create the browser window.
