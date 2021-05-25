@@ -15,8 +15,12 @@ rules.push(
     loader: 'vue-loader',
   },
   {
-    test: /\.(ttf|woff2?|svg)$/,
-    loader: 'file-loader'
+    test: /\.(ttf|woff2?|svg)(\?t=\d+)?$/i,
+    loader: 'file-loader',
+    options: {
+      name: '[name].[ext]',
+      publicPath: '..'
+    }
   }
 );
 
