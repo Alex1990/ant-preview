@@ -34,4 +34,9 @@ export default defineComponent({
     min-height: 100vh;
     background: #ddd;
 }
+
+.image {
+    max-width: 100vw;
+    max-height: 100vh;
+}
 </style>
