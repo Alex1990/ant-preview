@@ -1,5 +1,5 @@
 import path from 'path'
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow } from 'electron'
 import './setMenu.ts'
 import sendFile from './utils/sendFile'
 import openFileDialog from './utils/openFileDialog'

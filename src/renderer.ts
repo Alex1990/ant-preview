@@ -1,6 +1,6 @@
 /**
- * This file will automatically be loaded by webpack and run in the "renderer" context.
- * To learn more about the differences between the "main" and the "renderer" context in
+ * This file will automatically be loaded by webpack and run in the 'renderer' context.
+ * To learn more about the differences between the 'main' and the 'renderer' context in
  * Electron, visit:
  *
  * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
@@ -22,7 +22,7 @@
  *    webPreferences: {
  *      nodeIntegration: true
  *    }
- *  });
+ *  })
  * ```
  */
 
@@ -33,9 +33,9 @@ import App from './App.vue'
 import store from './store/'
 
 const app = createApp({
-    render() {
-        return h(App)
-    }
+  render() {
+    return h(App)
+  },
 })
 
 app.use(store)

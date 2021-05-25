@@ -1,6 +1,11 @@
-import { app, BrowserWindow, Menu, MenuItem, MenuItemConstructorOptions } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  Menu,
+  MenuItem,
+  MenuItemConstructorOptions,
+} from 'electron'
 import openFileDialog from './utils/openFileDialog'
-
 
 const isMac = process.platform === 'darwin'
 
@@ -10,20 +15,24 @@ const menuItemClick = (item: MenuItem, focusedWindow: BrowserWindow) => {
 
 const template = [
   // { role: 'appMenu' }
-  ...(isMac ? [{
-    label: app.name,
-    submenu: [
-      { role: 'about' },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideothers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  }] : []),
+  ...(isMac
+    ? [
+        {
+          label: app.name,
+          submenu: [
+            { role: 'about' },
+            { type: 'separator' },
+            { role: 'services' },
+            { type: 'separator' },
+            { role: 'hide' },
+            { role: 'hideothers' },
+            { role: 'unhide' },
+            { type: 'separator' },
+            { role: 'quit' },
+          ],
+        },
+      ]
+    : []),
   // { role: 'fileMenu' }
   {
     label: 'File',
@@ -34,10 +43,10 @@ const template = [
         accelerator: isMac ? 'Cmd+O' : 'Ctrl+O',
         click(item: MenuItem, focusedWindow: BrowserWindow) {
           openFileDialog(focusedWindow)
-        }
+        },
       },
-      isMac ? { role: 'close' } : { role: 'quit' }
-    ]
+      isMac ? { role: 'close' } : { role: 'quit' },
+    ],
   },
   // { role: 'viewMenu' }
   {
@@ -47,50 +56,50 @@ const template = [
         id: 'resetZoom',
         label: 'Reset Zoom',
         click: menuItemClick,
-        accelerator: isMac ? 'Cmd+0' : 'Ctrl+0'
+        accelerator: isMac ? 'Cmd+0' : 'Ctrl+0',
       },
       {
         id: 'zoomOut',
         label: 'Zoom Out',
         click: menuItemClick,
-        accelerator: isMac ? 'Cmd+-' : 'Ctrl+-'
+        accelerator: isMac ? 'Cmd+-' : 'Ctrl+-',
       },
       {
         id: 'zoomIn',
         label: 'Zoom In',
         click: menuItemClick,
-        accelerator: isMac ? 'Cmd+Plus' : 'Ctrl+Plus'
+        accelerator: isMac ? 'Cmd+Plus' : 'Ctrl+Plus',
       },
       { type: 'separator' },
       {
         id: 'rotateLeft',
         label: 'Rotate Left',
         click: menuItemClick,
-        accelerator: isMac ? 'Cmd+L' : 'Ctrl+L'
+        accelerator: isMac ? 'Cmd+L' : 'Ctrl+L',
       },
       {
         id: 'rotateRight',
         label: 'Rotate Right',
         click: menuItemClick,
-        accelerator: isMac ? 'Cmd+R' : 'Ctrl+R'
+        accelerator: isMac ? 'Cmd+R' : 'Ctrl+R',
       },
       {
         id: 'flipVertical',
         label: 'Flip Vertical',
         click: menuItemClick,
-        // "Shift" means there is a reverse command, so comment the below temporarily
+        // 'Shift' means there is a reverse command, so comment the below temporarily
         // accelerator: isMac ? 'Cmd+Shift+V' : 'Ctrl+Shift+V'
       },
       {
         id: 'flipHorizontal',
         label: 'Flip Horizontal',
         click: menuItemClick,
-        // "Shift" means there is a reverse command, so comment the below temporarily
+        // 'Shift' means there is a reverse command, so comment the below temporarily
         // accelerator: isMac ? 'Cmd+Shift+H' : 'Ctrl+Shift+H'
       },
       { type: 'separator' },
-      { role: 'toggleDevtools' }
-    ]
+      { role: 'toggleDevtools' },
+    ],
   },
   // { role: 'windowMenu' }
   {
@@ -98,24 +107,24 @@ const template = [
     submenu: [
       { role: 'minimize' },
       { role: 'zoom' },
-      ...(isMac ? [
-        { type: 'separator' },
-        { role: 'front' },
-        { type: 'separator' },
-        { role: 'window' }
-      ] : [
-        { role: 'close' }
-      ])
-    ]
+      ...(isMac
+        ? [
+            { type: 'separator' },
+            { role: 'front' },
+            { type: 'separator' },
+            { role: 'window' },
+          ]
+        : [{ role: 'close' }]),
+    ],
   },
   {
     role: 'help',
     submenu: [
       {
-        label: 'Learn More'
-      }
-    ]
-  }
+        label: 'Learn More',
+      },
+    ],
+  },
 ]
 
 const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[])
