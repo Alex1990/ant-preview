@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog } from 'electron';
 import readChunk from 'read-chunk'
 import FileType from 'file-type'
 import isSvg from 'is-svg'
@@ -18,7 +18,24 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-let file = '/Users/chaoalex/Documents/picky.png'
+let file = ''
+
+const sendFile = async (win: BrowserWindow, file: string) => {
+  const buffer = readChunk.sync(file, 0, 4100)
+  const fileType = await FileType.fromBuffer(buffer)
+  let mime = ''
+  const data = await fsp.readFile(file)
+  if (fileType) {
+    mime = fileType.mime
+  } else if (isSvg(data)) {
+    mime = 'image/svg+xml'
+  }
+  win.webContents.send('open', {
+    path: file,
+    mime,
+    data,
+  })
+}
 
 const createWindow = async () => {
   // Create the browser window.
@@ -36,20 +53,16 @@ const createWindow = async () => {
   // and load the index.html of the app.
   await mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  const buffer = readChunk.sync(file, 0, 4100)
-  const fileType = await FileType.fromBuffer(buffer)
-  let mime = ''
-  const data = await fsp.readFile(file)
-  if (fileType) {
-    mime = fileType.mime
-  } else if (isSvg(data)) {
-    mime = 'image/svg+xml'
+  if (file) {
+    sendFile(mainWindow, file)
+  } else {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+      properties: ['openFile']
+    })
+    if (!canceled && filePaths.length > 0) {
+      sendFile(mainWindow, filePaths[0])
+    }
   }
-  mainWindow.webContents.send('open', {
-    path: file,
-    mime,
-    data,
-  })
 };
 
 // This method will be called when Electron has finished
