@@ -21,6 +21,7 @@ const createWindow = async () => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    icon: path.resolve(__dirname, 'assets/images/logo_256x256.png'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
