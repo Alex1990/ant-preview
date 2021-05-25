@@ -1,5 +1,6 @@
 import { BrowserWindow, dialog } from 'electron'
 import fs from 'fs'
+import path from 'path'
 import readChunk from 'read-chunk'
 import FileType from 'file-type'
 import isSvg from 'is-svg'
@@ -33,6 +34,7 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
   }
   win.webContents.send('open', {
     path: file,
+    name: path.basename(file),
     mime,
     data,
   })
