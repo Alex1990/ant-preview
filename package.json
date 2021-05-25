@@ -1,6 +1,6 @@
 {
   "name": "ant-preview",
-  "productName": "ant-preview",
+  "productName": "Ant Preview",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
