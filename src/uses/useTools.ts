@@ -43,11 +43,11 @@ export default function useTools(): Ref<Tool[]> {
       title: 'Zoom in',
       icon: 'zoom-in',
     },
-    {
-      name: 'inspector',
-      title: 'View image properties',
-      icon: 'info',
-    },
+    // {
+    //   name: 'inspector',
+    //   title: 'View image properties',
+    //   icon: 'info',
+    // },
   ])
   return tools
 }
