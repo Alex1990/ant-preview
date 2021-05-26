@@ -27,7 +27,7 @@ const store = createStore<State>({
     height: 0,
     naturalWidth: 0,
     naturalHeight: 0,
-    scaleRatios: [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 4, 8, 16],
+    scaleRatios: [0.01, 0.02, 0.05, 0.0625, 0.1, 0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20, 25, 50, 100],
     scale: [1, 1],
     rotate: 0,
   },
