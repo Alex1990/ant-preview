@@ -1,6 +1,15 @@
 import { createStore } from 'vuex'
 
+export interface VFile {
+  path: string
+  name: string
+  mime: string
+  data: Uint8Array
+}
 export interface State {
+  file?: VFile
+  width: number
+  height: number
   scaleRatios: number[]
   scale: [number, number]
   rotate: number
@@ -8,11 +17,23 @@ export interface State {
 
 const store = createStore<State>({
   state: {
+    file: null,
+    width: 0,
+    height: 0,
     scaleRatios: [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 4, 8, 16],
     scale: [1, 1],
     rotate: 0,
   },
   mutations: {
+    setFile(state, payload) {
+      state.file = payload
+    },
+    setWidth(state, payload) {
+      state.width = payload
+    },
+    setHeight(state, payload) {
+      state.height = payload
+    },
     resetZoom(state) {
       const { scale } = state
       const [x, y] = scale

@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <img :src="src" class="image" :style="style" />
+    <img :src="src" class="image" :style="style" ref="image" @load="onLoad" />
   </div>
 </template>
 
@@ -23,6 +23,13 @@ export default defineComponent({
       style,
     }
   },
+  methods: {
+    onLoad() {
+      const { clientWidth, clientHeight } = this.$refs.image
+      this.$store.commit('setWidth', clientWidth)
+      this.$store.commit('setHeight', clientHeight)
+    }
+  }
 })
 </script>
 
@@ -31,7 +38,8 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: calc(100vh - 24px);
+  overflow: auto;
 }
 
 .image {
