@@ -1,8 +1,8 @@
 <template>
     <div class="status-bar">
-        {{ `${scale * 100}%`}}
+        {{ `${scale}%`}}
         {{ `  |  `}}
-        {{ `${width} x ${height} pixels`}}
+        {{ `${naturalWidth} x ${naturalHeight} pixels`}}
         {{ `  |  `}}
         {{ `${mime}`}}
         {{ `  |  `}}
@@ -27,9 +27,19 @@ export default defineComponent({
                 const { file } = store.state
                 return file ? prettyBytes(file.stats.size) : ''
             }),
-            scale: computed(() => Math.abs(store.state.scale[0])),
-            width: computed(() => store.state.width),
-            height: computed(() => store.state.height),
+            scale: computed(() => {
+                const result = Math.abs(store.state.scale[0]) * 100
+                if (Number.isInteger(result)) {
+                    return String(result)
+                } else {
+                    if (Number.isInteger(result  * 10)) {
+                        return result.toFixed(1)
+                    }
+                    return result.toFixed(2)
+                }
+            }),
+            naturalWidth: computed(() => store.state.naturalWidth),
+            naturalHeight: computed(() => store.state.naturalHeight),
         }
     },
 })
