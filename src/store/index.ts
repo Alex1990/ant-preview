@@ -28,6 +28,13 @@ const store = createStore<State>({
     rotate: 0,
   },
   mutations: {
+    reset(state) {
+      state.file = null
+      state.width = 0
+      state.height = 0
+      state.scale = [1, 1]
+      state.rotate = 0
+    },
     setFile(state, payload) {
       state.file = payload
     },

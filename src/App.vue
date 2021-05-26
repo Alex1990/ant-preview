@@ -24,6 +24,7 @@ export default defineComponent({
     const title = useTitle('Ant Preview')
     const url = ref('')
     window.electron.ipcRenderer.on('open', (file: VFile) => {
+      store.commit('reset')
       store.commit('setFile', file)
       title.value = file.name
       const blob = new Blob([file.data.buffer], { type: file.mime })
