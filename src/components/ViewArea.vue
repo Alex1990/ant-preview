@@ -46,9 +46,12 @@ export default defineComponent({
 <style scoped>
 .background {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
   height: calc(100vh - 24px);
   overflow: auto;
+}
+
+.image {
+  margin: auto;
 }
 </style>
