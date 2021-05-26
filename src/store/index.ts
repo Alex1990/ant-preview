@@ -1,3 +1,4 @@
+import { Stats } from 'fs'
 import { createStore } from 'vuex'
 
 export interface VFile {
@@ -5,7 +6,9 @@ export interface VFile {
   name: string
   mime: string
   data: Uint8Array
+  stats: Stats
 }
+
 export interface State {
   file?: VFile
   width: number

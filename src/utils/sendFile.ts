@@ -16,7 +16,6 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
   const buffer = readChunk.sync(file, 0, 4100)
   const fileType = await FileType.fromBuffer(buffer)
   let mime = ''
-  const data = await fsp.readFile(file)
   let ext = ''
   if (fileType) {
     mime = fileType.mime
@@ -25,17 +24,26 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
       showNotSupportMessage()
       return
     }
-  } else if (isSvg(data)) {
-    mime = 'image/svg+xml'
-    ext = 'svg'
-  } else {
-    showNotSupportMessage()
-    return
   }
+  const data = await fsp.readFile(file)
+
+  if (!fileType) {
+    if (isSvg(data)) {
+      mime = 'image/svg+xml'
+      ext = 'svg'
+    } else {
+      showNotSupportMessage()
+      return
+    }
+  }
+
+  const stats = await fsp.stat(file)
+
   win.webContents.send('open', {
     path: file,
     name: path.basename(file),
     mime,
     data,
+    stats,
   })
 }

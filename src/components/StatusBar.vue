@@ -5,12 +5,15 @@
         {{ `${width} x ${height} pixels`}}
         {{ `  |  `}}
         {{ `${mime}`}}
+        {{ `  |  `}}
+        {{ `${size}`}}
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
+import prettyBytes from 'pretty-bytes'
 
 export default defineComponent({
     setup() {
@@ -19,6 +22,10 @@ export default defineComponent({
             mime: computed(() => {
                 const { file } = store.state
                 return file ? file.mime : ''
+            }),
+            size: computed(() => {
+                const { file } = store.state
+                return file ? prettyBytes(file.stats.size) : ''
             }),
             scale: computed(() => Math.abs(store.state.scale[0])),
             width: computed(() => store.state.width),
