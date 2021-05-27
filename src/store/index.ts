@@ -31,6 +31,11 @@ const store = createStore<State>({
     scale: [1, 1],
     rotate: 0,
   },
+  getters: {
+    fitRatio(state) {
+      return state.width / state.naturalWidth
+    }
+  },
   mutations: {
     reset(state) {
       state.file = null

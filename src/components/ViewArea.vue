@@ -26,7 +26,36 @@ export default defineComponent({
       }
     })
     return {
+      scale: computed(() => store.state.scale),
       style,
+    }
+  },
+  watch: {
+    scale(scale, oldScale) {
+      const { naturalWidth, naturalHeight } = this.$store.state
+      const { fitRatio } = this.$store.getters
+      const ratio = Math.abs(scale[0])
+
+      if (ratio <= fitRatio) return
+
+      const oldRatio = Math.abs(oldScale[0])
+      const width = ratio * naturalWidth
+      const height = ratio * naturalHeight
+      const oldWidth = oldRatio * naturalWidth
+      const oldHeight = oldRatio * naturalHeight
+      const $background = this.$refs.background
+      const { width: bgWidth, height: bgHeight } = micell.dom.viewport($background)
+      const { scrollTop, scrollLeft }  = $background
+      const oldCenterXRatio = oldWidth >= bgWidth ? (scrollLeft + bgWidth / 2) / oldWidth : 0.5
+      const oldCenterYRatio = oldHeight >= bgHeight ? (scrollTop + bgHeight / 2) / oldHeight : 0.5
+      const centerX = oldCenterXRatio * width
+      const centerY = oldCenterYRatio * height
+
+      // Must wait for UI rendering
+      setTimeout(() => {
+        $background.scrollLeft = centerX - bgWidth / 2
+        $background.scrollTop = centerY - bgHeight / 2
+      }, 0)
     }
   },
   methods: {
