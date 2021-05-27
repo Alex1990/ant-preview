@@ -1,6 +1,8 @@
-<figure style="text-align: center">
-  <img src="./src/assets/images/logo_256x256.png" alt="Ant Preview Logo" />
-</figure>
+<p align="center">
+  <a href="https://github.com/Alex1990/ant-preview" target="_blank" rel="noopener noreferrer">
+    <img src="./src/assets/images/logo_256x256.png" alt="Ant Preview Logo" />
+  </a>
+</p>
 
 # Ant Preview
 
