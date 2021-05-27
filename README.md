@@ -15,6 +15,10 @@ A simple image preview with the below formats supported at present.
 * webp
 * svg
 
+<p align="center">
+  <img width="400" src="./src/assets/images/screenshot.png" alt="Ant Preview Screenshot" />
+</p>
+
 ## Tech stack
 
 * Electron
