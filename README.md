@@ -66,4 +66,4 @@ A simple image preview with the below formats supported at present.
 
 ## License
 
-MIT.
+Apache License 2.0
