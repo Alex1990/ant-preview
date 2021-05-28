@@ -51,11 +51,10 @@ export default defineComponent({
       const centerX = oldCenterXRatio * width
       const centerY = oldCenterYRatio * height
 
-      // Must wait for UI rendering
-      setTimeout(() => {
+      this.$nextTick(() => {
         $background.scrollLeft = centerX - bgWidth / 2
         $background.scrollTop = centerY - bgHeight / 2
-      }, 0)
+      })
     }
   },
   methods: {
