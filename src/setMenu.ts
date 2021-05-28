@@ -45,6 +45,14 @@ const template = [
           openFileDialog(focusedWindow)
         },
       },
+      { type: 'separator' },
+      {
+        id: 'print',
+        label: 'Print...',
+        accelerator: isMac ? 'Cmd+P' : 'Ctrl+P',
+        click: menuItemClick,
+      },
+      { type: 'separator' },
       isMac ? { role: 'close' } : { role: 'quit' },
     ],
   },

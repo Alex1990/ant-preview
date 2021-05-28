@@ -43,6 +43,14 @@ const handleCommand = (store: Store<State>, name: string) => {
     case 'zoomIn':
       store.commit('zoomIn')
       break
+    case 'print':
+      // TODO: need restore zoom after printing
+      store.commit('resetZoom')
+      // Wait for dom updating
+      setTimeout(() => {
+        window.print()
+      }, 0)
+      break
     default:
       console.error('unknown command')
   }
@@ -86,5 +94,11 @@ export default defineComponent({
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.3);
   color: #fff;
+}
+
+@media print {
+  .toolbar {
+    visibility: hidden;
+  }
 }
 </style>

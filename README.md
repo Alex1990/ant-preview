@@ -37,13 +37,13 @@ A simple image preview with the below formats supported at present.
 
 ### Core features
 
-* [ ] Try to use svg transform
+* [x] ~~Try to use svg transform~~. Not work! Using nextTick could figure out blink when scaling the image.
 * [ ] Support draging file
 * [ ] Show exif information
 * [ ] Dark theme
 * [ ] Internationalization
 * [ ] Movable toolbar
-* [ ] Print
+* [x] Print
 * [ ] Help document
 * [ ] Multiple files
 
