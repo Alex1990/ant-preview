@@ -52,7 +52,7 @@ A simple image preview with the below formats supported at present.
 * [ ] E2E testing
 * [ ] Auto packaging
 * [ ] Performance testing
-* [ ] Accessability
+* [ ] Accessibility
 * [ ] Security
 
 ### More image formats
