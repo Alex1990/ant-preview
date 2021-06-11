@@ -38,7 +38,7 @@ A simple image preview with the below formats supported at present.
 ### Core features
 
 * [x] ~~Try to use svg transform~~. Not work! Using nextTick could figure out blink when scaling the image.
-* [ ] Support draging file
+* [x] Support dragging file
 * [ ] Show exif information
 * [ ] Dark theme
 * [ ] Internationalization

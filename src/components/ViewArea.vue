@@ -1,6 +1,9 @@
 <template>
-  <div class="background" ref="background">
-    <img :src="src" class="image" :style="style" ref="image" @load="onLoad" />
+  <div class="background" ref="background" @drop="onDrop" @dragover="onDragOver">
+    <img v-if="src" :src="src" class="image" :style="style" ref="image" @load="onLoad" />
+    <p v-else class="empty-tip">
+      You can drap and drop file to here.
+    </p>
   </div>
 </template>
 
@@ -66,6 +69,24 @@ export default defineComponent({
       const ratio = hRatio < vRatio ? hRatio : vRatio
       this.$store.commit('setScale', [ratio, ratio])
       this.$store.commit('setDimensions', { width, height, naturalWidth, naturalHeight })
+    },
+    onDrop(e: DragEvent) {
+      e.preventDefault()
+      const files = []
+      for (let i = 0; i < e.dataTransfer.items.length; i++) {
+        const item = e.dataTransfer.items[i]
+        if (item.kind === 'file') {
+          files.push(item.getAsFile())
+        }
+      }
+      console.log(files)
+      if (files.length > 0) {
+        const firstFile = files[0]
+        window.electron.ipcRenderer.send('drop-file', firstFile.path)
+      }
+    },
+    onDragOver(e: DragEvent) {
+      e.preventDefault()
     }
   }
 })
@@ -81,5 +102,10 @@ export default defineComponent({
 
 .image {
   margin: auto;
+}
+
+.empty-tip {
+  margin: auto;
+  color: #aaa;
 }
 </style>

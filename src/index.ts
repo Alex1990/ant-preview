@@ -1,5 +1,5 @@
 import path from 'path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, IpcMainEvent } from 'electron'
 import './setMenu.ts'
 import sendFile from './utils/sendFile'
 import openFileDialog from './utils/openFileDialog'
@@ -38,6 +38,10 @@ const createWindow = async () => {
   } else {
     openFileDialog(mainWindow)
   }
+
+  ipcMain.on('drop-file', (e: IpcMainEvent, file: string) => {
+    sendFile(mainWindow, file)
+  })
 };
 
 // This method will be called when Electron has finished

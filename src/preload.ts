@@ -7,5 +7,8 @@ contextBridge.exposeInMainWorld('electron', {
         callback(data)
       })
     },
+    send: function(eventName: string, data: string): void {
+      ipcRenderer.send(eventName, data)
+    }
   },
 })
