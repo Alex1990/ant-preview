@@ -1,0 +1,40 @@
+# Ref: https://github.com/samuelmeuli/action-electron-builder/blob/master/.github/workflows/test.yml
+name: Package
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - *
+  pull_request:
+    branches:
+      - main
+    tags:
+      - *
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Make and publish distribution
+        run: yarn publish
+
+
