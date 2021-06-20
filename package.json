@@ -20,6 +20,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
+        "name": "ant-preview",
         "icon": "./src/assets/images/logo_256x256"
       },
       "makers": [
