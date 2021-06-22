@@ -22,5 +22,28 @@
       "name": "Help",
       "learn": "Learn More"
     }
+  },
+  "toolbar": {
+    "rotateLeft": {
+      "title": "Rotate left by 90°"
+    },
+    "rotateRight": {
+      "title": "Rotate right by 90°"
+    },
+    "flipVertical": {
+      "title": "Flip vertically"
+    },
+    "flipHorizontal": {
+      "title": "Flip horizontally"
+    },
+    "resetZoom": {
+      "title": "Reset zoom"
+    },
+    "zoomOut": {
+      "title": "Zoom out"
+    },
+    "zoomIn": {
+      "title": "Zoom in"
+    }
   }
 }

@@ -41,7 +41,7 @@ A simple image preview with the below formats supported at present.
 * [x] Support dragging file
 * [ ] Show exif information
 * [ ] Dark theme
-* [ ] Internationalization
+* [x] Internationalization
 * [ ] Movable toolbar
 * [x] Print
 * [ ] Help document

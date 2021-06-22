@@ -1,4 +1,5 @@
 import { ref, Ref } from 'vue'
+import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 
 export interface Tool {
   name: string
@@ -6,41 +7,43 @@ export interface Tool {
   icon: string
 }
 
+const localeData = getBrowserLocaleData()
+
 export default function useTools(): Ref<Tool[]> {
   const tools = ref([
     {
       name: 'rotateLeft',
-      title: 'Rotate left by 90°',
+      title: localeData.toolbar.rotateLeft.title,
       icon: 'rotate-left',
     },
     {
       name: 'rotateRight',
-      title: 'Rotate right by 90°',
+      title: localeData.toolbar.rotateRight.title,
       icon: 'rotate-right',
     },
     {
       name: 'flipVertical',
-      title: 'Flip vertically',
+      title: localeData.toolbar.flipVertical.title,
       icon: 'flip-vertical',
     },
     {
       name: 'flipHorizontal',
-      title: 'Flip horizontally',
+      title: localeData.toolbar.flipHorizontal.title,
       icon: 'flip-horizontal',
     },
     {
       name: 'resetZoom',
-      title: 'Reset zoom',
+      title: localeData.toolbar.resetZoom.title,
       icon: 'search',
     },
     {
       name: 'zoomOut',
-      title: 'Zoom out',
+      title: localeData.toolbar.zoomOut.title,
       icon: 'zoom-out',
     },
     {
       name: 'zoomIn',
-      title: 'Zoom in',
+      title: localeData.toolbar.zoomIn.title,
       icon: 'zoom-in',
     },
     // {

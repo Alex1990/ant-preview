@@ -6,12 +6,12 @@ import {
   MenuItemConstructorOptions,
 } from 'electron'
 import openFileDialog from './utils/openFileDialog'
-import { locales, Locale } from './locales'
+import { getLocaleData, Locale } from './locales'
 
 export function setMenu(): void {
   const isMac = process.platform === 'darwin'
   const locale = app.getLocale() as Locale
-  const localeData = locales[locale] ? locales[locale] : locales['en-US']
+  const localeData = getLocaleData(locale)
 
   const menuItemClick = (item: MenuItem, focusedWindow: BrowserWindow) => {
     focusedWindow.webContents.send('menuItem', item.id)
