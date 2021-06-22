@@ -50,7 +50,7 @@ A simple image preview with the below formats supported at present.
 ### Engineering
 
 * [ ] E2E testing
-* [ ] Auto packaging
+* [x] Auto packaging
 * [ ] Performance testing
 * [ ] Accessibility
 * [ ] Security
