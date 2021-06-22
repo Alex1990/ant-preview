@@ -1,0 +1,26 @@
+{
+  "menu": {
+    "file": {
+      "name": "File",
+      "openFile": "Open File",
+      "print": "Print..."
+    },
+    "view": {
+      "name": "View",
+      "resetZoom": "Reset Zoom",
+      "zoomOut": "Zoom Out",
+      "zoomIn": "Zoom In",
+      "rotateLeft": "Rotate Left",
+      "rotateRight": "Rotate Right",
+      "flipVertical": "Flip Vertical",
+      "flipHorizontal": "Flip Horizontal"
+    },
+    "window": {
+      "name": "Window"
+    },
+    "help": {
+      "name": "Help",
+      "learn": "Learn More"
+    }
+  }
+}

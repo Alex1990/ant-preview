@@ -1,0 +1,26 @@
+{
+  "menu": {
+    "file": {
+      "name": "文件",
+      "openFile": "打开文件",
+      "print": "打印..."
+    },
+    "view": {
+      "name": "查看",
+      "resetZoom": "重置缩放",
+      "zoomOut": "缩小",
+      "zoomIn": "放大",
+      "rotateLeft": "向左旋转",
+      "rotateRight": "向右旋转",
+      "flipVertical": "垂直翻转",
+      "flipHorizontal": "水平翻转"
+    },
+    "window": {
+      "name": "窗口"
+    },
+    "help": {
+      "name": "帮助",
+      "learn": "了解更多"
+    }
+  }
+}

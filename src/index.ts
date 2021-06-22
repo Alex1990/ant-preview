@@ -1,6 +1,6 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain, IpcMainEvent } from 'electron'
-import './setMenu.ts'
+import { setMenu } from './setMenu'
 import sendFile from './utils/sendFile'
 import openFileDialog from './utils/openFileDialog'
 
@@ -47,7 +47,10 @@ const createWindow = async () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  setMenu()
+  createWindow()
+)
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
