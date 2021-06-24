@@ -46,11 +46,11 @@ export default function useTools(): Ref<Tool[]> {
       title: localeData.toolbar.zoomIn.title,
       icon: 'zoom-in',
     },
-    // {
-    //   name: 'inspector',
-    //   title: 'View image properties',
-    //   icon: 'info',
-    // },
+    {
+      name: 'propertyInfo',
+      title: localeData.toolbar.propertyInfo.title,
+      icon: 'info',
+    },
   ])
   return tools
 }

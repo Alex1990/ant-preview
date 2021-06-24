@@ -65,6 +65,13 @@ export function setMenu(): void {
       label: localeData.menu.view.name,
       submenu: [
         {
+          id: 'propertyInfo',
+          label: localeData.menu.view.propertyInfo,
+          click: menuItemClick,
+          accelerator: isMac ? 'Cmd+i' : 'Ctrl+i',
+        },
+        { type: 'separator' },
+        {
           id: 'resetZoom',
           label: localeData.menu.view.resetZoom,
           click: menuItemClick,

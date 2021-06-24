@@ -4,6 +4,7 @@ import path from 'path'
 import readChunk from 'read-chunk'
 import FileType from 'file-type'
 import isSvg from 'is-svg'
+import exifr from 'exifr'
 import extensions from './extensions'
 
 const fsp = fs.promises
@@ -38,6 +39,7 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
   }
 
   const stats = await fsp.stat(file)
+  const meta = await exifr.parse(file)
 
   win.webContents.send('open', {
     path: file,
@@ -45,5 +47,6 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     mime,
     data,
     stats,
+    meta,
   })
 }

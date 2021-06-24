@@ -51,6 +51,9 @@ const handleCommand = (store: Store<State>, name: string) => {
         window.print()
       }, 0)
       break
+    case 'propertyInfo':
+      store.commit('openPropertyInfo')
+      break
     default:
       console.error('unknown command')
   }

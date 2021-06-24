@@ -2,6 +2,7 @@
   <ViewArea :src="url" />
   <StatusBar />
   <Toolbar />
+  <PropertyInfo />
 </template>
 
 <script lang="ts">
@@ -11,6 +12,7 @@ import { useTitle } from '@vueuse/core'
 import ViewArea from './components/ViewArea.vue'
 import StatusBar from './components/StatusBar.vue'
 import Toolbar from './components/Toolbar.vue'
+import PropertyInfo from './components/PropertyInfo.vue'
 import { VFile } from './store'
 
 export default defineComponent({
@@ -18,6 +20,7 @@ export default defineComponent({
     ViewArea,
     StatusBar,
     Toolbar,
+    PropertyInfo,
   },
   setup() {
     const store = useStore()
@@ -33,6 +36,7 @@ export default defineComponent({
       }
       url.value = URL.createObjectURL(blob)
     })
+
     return {
       url,
     }

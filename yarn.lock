@@ -2973,6 +2973,11 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+exifr@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.nlark.com/exifr/download/exifr-7.1.0.tgz#c6ec7cc1b3d67062d770f959a9f4a0b5d1983df2"
+  integrity sha1-xux8wbPWcGLXcPlZqfSgtdGYPfI=
+
 expand-brackets@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/expand-brackets/-/expand-brackets-2.1.4.tgz#b77735e315ce30f6b6eff0f83b04151a22449622"
