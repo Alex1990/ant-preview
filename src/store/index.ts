@@ -130,6 +130,9 @@ const store = createStore<State>({
     closePropertyInfo(state) {
       state.propertyInfoVisible = false
     },
+    togglePropertyInfo(state) {
+      state.propertyInfoVisible = !state.propertyInfoVisible
+    },
   },
 })
 

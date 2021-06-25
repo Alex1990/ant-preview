@@ -52,7 +52,7 @@ const handleCommand = (store: Store<State>, name: string) => {
       }, 0)
       break
     case 'propertyInfo':
-      store.commit('openPropertyInfo')
+      store.commit('togglePropertyInfo')
       break
     default:
       console.error('unknown command')
