@@ -39,24 +39,9 @@ export default defineComponent({
   top: 50px;
   right: 50px;
   width: 300px;
-  height: 400px;
   font-size: 12px;
   background: rgba(0,0,0,.75);
   color: #fff;
-  overflow: auto;
-}
-
-.property-info::-webkit-scrollbar {
-  width: 8px;
-}
- 
-.property-info::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
- 
-.property-info::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
 }
 
 .title-bar {
@@ -71,7 +56,7 @@ export default defineComponent({
 
 .close-btn {
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 12px;
   padding: 3px;
   font-size: 14px;
   line-height: 1;
@@ -87,8 +72,22 @@ export default defineComponent({
 .property-list {
   margin: 0;
   padding: 12px 12px 12px 24px;
+  height: 400px;
   line-height: 1.5;
   overflow: auto;
+}
+
+.property-list::-webkit-scrollbar {
+  width: 8px;
+}
+ 
+.property-list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.property-list::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 
 .property-item {
