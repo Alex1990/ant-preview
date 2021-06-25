@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar">
+  <div v-if="hasFile" class="toolbar">
     <div class="toolbar-content">
       <Tool
         v-for="tool in tools"
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { Store, useStore } from 'vuex'
 import Tool from './Tool.vue'
 import useTools from '../uses/useTools'
@@ -73,6 +73,7 @@ export default defineComponent({
       handleCommand(store, id)
     })
     return {
+      hasFile: computed(() => store.getters.hasFile),
       tools,
       onToolClick,
     }

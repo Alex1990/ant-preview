@@ -36,6 +36,9 @@ const store = createStore<State>({
     propertyInfoVisible: false,
   },
   getters: {
+    hasFile(state) {
+      return !!state.file
+    },
     fitRatio(state) {
       return state.width / state.naturalWidth
     }

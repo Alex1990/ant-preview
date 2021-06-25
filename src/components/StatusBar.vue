@@ -1,5 +1,5 @@
 <template>
-  <div class="status-bar">
+  <div v-if="hasFile" class="status-bar">
     {{ `${scale}%` }}
     {{ `  |  ` }}
     {{ `${naturalWidth} x ${naturalHeight} pixels` }}
@@ -19,6 +19,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     return {
+      hasFile: computed(() => store.getters.hasFile),
       mime: computed(() => {
         const { file } = store.state
         return file ? file.mime : ''
