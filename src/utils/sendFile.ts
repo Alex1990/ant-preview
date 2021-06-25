@@ -6,6 +6,7 @@ import FileType from 'file-type'
 import isSvg from 'is-svg'
 import exifr from 'exifr'
 import extensions from './extensions'
+import { enableFileOperationMenuItems } from '../setMenu'
 
 const fsp = fs.promises
 
@@ -49,4 +50,5 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     stats,
     meta,
   })
+  enableFileOperationMenuItems()
 }
