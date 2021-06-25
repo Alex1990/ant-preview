@@ -20,7 +20,7 @@ A simple image preview with the below formats supported at present.
 </p>
 
 ## Tech stack
-h
+
 * Electron
 * electron-forge
 * webpack
@@ -40,18 +40,29 @@ h
 * [x] ~~Try to use svg transform~~. Not work! Using nextTick could figure out blink when scaling the image.
 * [x] Support dragging file
 * [x] Show exif information
-* [ ] Dark theme
+* [x] Dark theme
 * [x] Internationalization
 * [ ] Movable toolbar
 * [x] Print
 * [ ] Help document
 * [ ] Multiple files
+* [ ] Recent files
+* [ ] Support using mouse wheel to zoom
+* [ ] Support using drag to move
+
+### Advanced features
+
+* [ ] Preference setting
+* [ ] Minimap
+* [ ] Magnifier
+* [ ] Fullscreen mode
+* [ ] Slideshow mode
 
 ### Engineering
 
 * [ ] E2E testing
 * [x] Auto packaging
-* [ ] Performance testing
+* [ ] Performance testing and improving
 * [ ] Accessibility
 * [ ] Security
 
