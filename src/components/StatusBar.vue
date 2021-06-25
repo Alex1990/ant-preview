@@ -66,4 +66,12 @@ export default defineComponent({
     visibility: hidden;
   }
 }
+
+@media screen and (prefers-color-scheme: dark) {
+  .status-bar {
+    border-top-color: #666;
+    background: #333;
+    color: #ddd;
+  }
+}
 </style>
