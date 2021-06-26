@@ -109,6 +109,7 @@
   "dependencies": {
     "@types/node": "^15.6.1",
     "@vueuse/core": "^4.11.0",
+    "@vueuse/gesture": "^1.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "exifr": "^7.1.0",
     "file-type": "^16.4.0",

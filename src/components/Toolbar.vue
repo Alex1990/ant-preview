@@ -1,5 +1,11 @@
 <template>
-  <div v-if="hasFile" class="toolbar">
+  <div
+    v-if="hasFile"
+    class="toolbar"
+    :style="{transform: `translate(${offsetX}px,${offsetY}px)`}"
+    v-drag="onDrag"
+    ref="toolbar"
+  >
     <div class="toolbar-content">
       <Tool
         v-for="tool in tools"
@@ -14,8 +20,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import { Store, useStore } from 'vuex'
+import { useStorage } from '@vueuse/core'
+import { Handler, useDrag } from '@vueuse/gesture'
 import Tool from './Tool.vue'
 import useTools from '../uses/useTools'
 import { State } from '../store'
@@ -72,10 +80,35 @@ export default defineComponent({
     window.electron.ipcRenderer.on('menuItem', (id: string) => {
       handleCommand(store, id)
     })
+
+    const toolbar = ref(null)
+    let lastOffsetX = useStorage('toolbarLastOffsetX', 0, localStorage)
+    let lastOffsetY = useStorage('toolbarLastOffsetY', 0, localStorage)
+    const offsetX = ref(lastOffsetX.value)
+    const offsetY = ref(lastOffsetY.value)
+
+    const onDrag: Handler<'drag', PointerEvent> = ({ movement: [x, y], dragging }) => {
+      offsetX.value = lastOffsetX.value + x
+      offsetY.value = lastOffsetY.value + y
+      if (!dragging) {
+        lastOffsetX.value += x
+        lastOffsetY.value += y
+      }
+    }
+    onMounted(() => {
+      useDrag(onDrag, {
+        domTarget: toolbar,
+      })
+    })
+
     return {
       hasFile: computed(() => store.getters.hasFile),
       tools,
+      toolbar,
+      offsetX,
+      offsetY,
       onToolClick,
+      onDrag,
     }
   },
 })

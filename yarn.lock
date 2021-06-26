@@ -901,6 +901,13 @@
     "@vueuse/shared" "4.11.0"
     vue-demi "*"
 
+"@vueuse/gesture@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.nlark.com/@vueuse/gesture/download/@vueuse/gesture-1.0.0.tgz#dd2c47cd2338dea5afc500ca7f10467524120a45"
+  integrity sha1-3SxHzSM43qWvxQDKfxBGdSQSCkU=
+  dependencies:
+    vue-demi "^0.7.4"
+
 "@vueuse/shared@4.11.0":
   version "4.11.0"
   resolved "https://registry.nlark.com/@vueuse/shared/download/@vueuse/shared-4.11.0.tgz#d5c453ac1c15e513d625f8035ec22c7562fd8441"
@@ -7627,6 +7634,11 @@ vue-demi@*:
   version "0.9.0"
   resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.9.0.tgz?cache=0&sync_timestamp=1620292790151&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-demi%2Fdownload%2Fvue-demi-0.9.0.tgz#b30da61450079d60a132d7aaf9e86d1949e8445e"
   integrity sha1-sw2mFFAHnWChMteq+ehtGUnoRF4=
+
+vue-demi@^0.7.4:
+  version "0.7.5"
+  resolved "https://registry.nlark.com/vue-demi/download/vue-demi-0.7.5.tgz?cache=0&sync_timestamp=1622101091467&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-demi%2Fdownload%2Fvue-demi-0.7.5.tgz#88dee7492fc99a0f911ff03fc02c658fa2a79af8"
+  integrity sha1-iN7nSS/Jmg+RH/A/wCxlj6Knmvg=
 
 vue-loader@^16.0.0:
   version "16.2.0"

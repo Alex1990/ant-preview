@@ -27,6 +27,7 @@
  */
 
 import { createApp, h } from 'vue'
+import { GesturePlugin } from '@vueuse/gesture'
 import './base.css'
 import './assets/fonts/iconfont.css'
 import App from './App.vue'
@@ -38,6 +39,7 @@ const app = createApp({
   },
 })
 
+app.use(GesturePlugin)
 app.use(store)
 
 app.mount('#app')
