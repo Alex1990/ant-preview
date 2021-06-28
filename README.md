@@ -42,11 +42,11 @@ A simple image preview with the below formats supported at present.
 * [x] Show exif information
 * [x] Dark theme
 * [x] Internationalization
-* [ ] Movable toolbar
+* [x] Movable toolbar
 * [x] Print
 * [ ] Help document
 * [ ] Multiple files
-* [ ] Recent files
+* [x] Recent files
 * [ ] Support using mouse wheel to zoom
 * [ ] Support using drag to move
 
