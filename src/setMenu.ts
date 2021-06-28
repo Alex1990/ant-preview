@@ -48,6 +48,9 @@ export function setMenu(): void {
           id: 'openFile',
           label: localeData.menu.file.openFile,
           accelerator: isMac ? 'Cmd+O' : 'Ctrl+O',
+          click(item: MenuItem, focusedWindow: BrowserWindow) {
+            openFileDialog(focusedWindow)
+          },
         },
         {
           role: 'recentdocuments',
