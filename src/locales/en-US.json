@@ -3,6 +3,10 @@
     "file": {
       "name": "File",
       "openFile": "Open File",
+      "recentFiles": {
+        "name": "Open Recent",
+        "clearFiles": "Clear Files"
+      },
       "print": "Print..."
     },
     "view": {

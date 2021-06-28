@@ -15,10 +15,11 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 }
 
 let file = ''
+let mainWindow: BrowserWindow
 
 const createWindow = async () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
     icon: path.resolve(__dirname, 'assets/images/logo_256x256.png'),
@@ -74,4 +75,7 @@ app.on('activate', () => {
 app.on('open-file', (e: Event, path: string) => {
   e.preventDefault()
   file = path
+  if (mainWindow) {
+    sendFile(mainWindow, file)
+  }
 })

@@ -3,6 +3,10 @@
     "file": {
       "name": "文件",
       "openFile": "打开文件",
+      "recentFiles": {
+        "name": "最近打开",
+        "clearFiles": "清除文件"
+      },
       "print": "打印..."
     },
     "view": {

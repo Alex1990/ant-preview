@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog } from 'electron'
+import { app, BrowserWindow, dialog } from 'electron'
 import fs from 'fs'
 import path from 'path'
 import readChunk from 'read-chunk'
@@ -51,4 +51,5 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     meta,
   })
   enableFileOperationMenuItems()
+  app.addRecentDocument(file)
 }
