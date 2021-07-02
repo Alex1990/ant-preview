@@ -62,6 +62,9 @@ const handleCommand = (store: Store<State>, name: string) => {
     case 'propertyInfo':
       store.commit('togglePropertyInfo')
       break
+    case 'settings':
+      store.commit('toggleSettingsVisible')
+      break
     default:
       console.error('unknown command')
   }

@@ -71,6 +71,12 @@ export function setMenu(): void {
           click: menuItemClick,
         },
         { type: 'separator' },
+        {
+          id: 'settings',
+          label: localeData.menu.file.settings,
+          click: menuItemClick,
+        },
+        { type: 'separator' },
         isMac ? { role: 'close' } : { role: 'quit' },
       ],
     },

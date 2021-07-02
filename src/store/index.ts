@@ -12,6 +12,7 @@ export interface VFile {
 }
 
 export interface State {
+  settingsVisible: boolean
   file?: VFile
   width: number
   height: number
@@ -25,6 +26,7 @@ export interface State {
 
 const store = createStore<State>({
   state: {
+    settingsVisible: false,
     file: null,
     width: 0,
     height: 0,
@@ -136,6 +138,9 @@ const store = createStore<State>({
     togglePropertyInfo(state) {
       state.propertyInfoVisible = !state.propertyInfoVisible
     },
+    toggleSettingsVisible(state) {
+      state.settingsVisible = !state.settingsVisible
+    }
   },
 })
 

@@ -3,16 +3,19 @@
   <StatusBar />
   <Toolbar />
   <PropertyInfo />
+  <Settings v-if="settingsVisible" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useTitle } from '@vueuse/core'
 import ViewArea from './components/ViewArea.vue'
 import StatusBar from './components/StatusBar.vue'
 import Toolbar from './components/Toolbar.vue'
 import PropertyInfo from './components/PropertyInfo.vue'
+import Settings from './components/Settings.vue'
+import useSettings from './uses/useSettings'
 import { VFile } from './store'
 
 export default defineComponent({
@@ -21,11 +24,13 @@ export default defineComponent({
     StatusBar,
     Toolbar,
     PropertyInfo,
+    Settings,
   },
   setup() {
     const store = useStore()
     const title = useTitle('Ant Preview')
     const url = ref('')
+
     window.electron.ipcRenderer.on('open', (file: VFile) => {
       store.commit('reset')
       store.commit('setFile', file)
@@ -37,8 +42,19 @@ export default defineComponent({
       url.value = URL.createObjectURL(blob)
     })
 
+    const settings = useSettings()
+
+    onMounted(() => {
+      document.body.style.background = settings.value.canvasBackgroundColor
+    })
+
+    watch(() => settings.value.canvasBackgroundColor, (color: string) => {
+      document.body.style.background = color
+    })
+
     return {
       url,
+      settingsVisible: computed(() => store.state.settingsVisible),
     }
   },
 })

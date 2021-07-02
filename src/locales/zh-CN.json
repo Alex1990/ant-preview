@@ -7,7 +7,8 @@
         "name": "最近打开",
         "clearFiles": "清除文件"
       },
-      "print": "打印..."
+      "print": "打印...",
+      "settings": "设置"
     },
     "view": {
       "name": "查看",
@@ -53,5 +54,10 @@
     "propertyInfo": {
       "title": "查看属性"
     }
+  },
+  "settings": {
+    "title": "设置",
+    "closeBtnTitle": "关闭设置",
+    "canvasBackgroundColor": "画布背景色"
   }
 }

@@ -52,7 +52,8 @@ A simple image preview with the below formats supported at present.
 
 ### Advanced features
 
-* [ ] Preference setting
+* [x] App settings panel
+* [ ] Keyboard settings panel
 * [ ] Minimap
 * [ ] Magnifier
 * [ ] Fullscreen mode
