@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import micell from 'micell'
 
@@ -16,7 +16,7 @@ export default defineComponent({
   props: {
     src: String,
   },
-  setup() {
+  setup(props) {
     const store = useStore()
     const style = computed(() => {
       const { naturalWidth, naturalHeight, scale, rotate } = store.state
@@ -28,6 +28,23 @@ export default defineComponent({
         height: `${ratio * naturalHeight}px`,
       }
     })
+
+    const onWheel = (e: WheelEvent) => {
+      if (props.src && e.ctrlKey) {
+        if (e.deltaY > 0) {
+          store.commit('zoomOut')
+        } else {
+          store.commit('zoomIn')
+        }
+      }
+    }
+    onMounted(() => {
+      document.addEventListener('mousewheel', onWheel)
+    })
+    onBeforeUnmount(() => {
+      document.removeEventListener('mousewheel', onWheel)
+    })
+
     return {
       scale: computed(() => store.state.scale),
       style,
