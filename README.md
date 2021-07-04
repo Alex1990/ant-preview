@@ -47,8 +47,8 @@ A simple image preview with the below formats supported at present.
 * [ ] Help document
 * [ ] Multiple files
 * [x] Recent files
-* [ ] Support using mouse wheel to zoom
-* [ ] Support using drag to move
+* [x] Support using mouse wheel to zoom
+* [x] Support using drag to move
 
 ### Advanced features
 
@@ -63,6 +63,7 @@ A simple image preview with the below formats supported at present.
 
 * [ ] E2E testing
 * [x] Auto packaging
+* [ ] Auto updater
 * [ ] Performance testing and improving
 * [ ] Accessibility
 * [ ] Security
