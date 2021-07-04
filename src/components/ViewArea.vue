@@ -1,14 +1,27 @@
 <template>
-  <div class="background" ref="background" @drop="onDrop" @dragover="onDragOver">
-    <img v-if="src" :src="src" class="image" :style="style" ref="image" @load="onLoad" />
-    <p v-else class="empty-tip">
+  <div v-if="src" class="background" ref="background">
+    <img
+      v-if="src"
+      :src="src"
+      class="image"
+      :style="style"
+      ref="image"
+      @load="onLoad"
+      @mousedown="onMouseDown"
+      @mousemove="onMouseMove"
+      @mouseup="onMouseUp"
+      @mouseout="onMouseOut"
+    />
+  </div>
+  <div v-else class="background" ref="background" @drop="onDrop" @dragover="onDragOver">
+    <p class="empty-tip">
       You can drap and drop file to here.
     </p>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import micell from 'micell'
 
@@ -17,6 +30,8 @@ export default defineComponent({
     src: String,
   },
   setup(props) {
+    const background = ref(null)
+    const image = ref(null)
     const store = useStore()
     const style = computed(() => {
       const { naturalWidth, naturalHeight, scale, rotate } = store.state
@@ -45,9 +60,64 @@ export default defineComponent({
       document.removeEventListener('mousewheel', onWheel)
     })
 
+    let dragging = false
+    let scrollWidth = 0
+    let scrollHeight = 0
+    let clientWidth = 0
+    let clientHeight = 0
+    let left = 0
+    let top = 0
+    let x = 0
+    let y = 0
+    const onMouseDown = (e: MouseEvent) => {
+      if (e.ctrlKey) {
+        dragging = true
+        scrollWidth = background.value.scrollWidth
+        scrollHeight = background.value.scrollHeight
+        clientWidth = background.value.clientWidth
+        clientHeight = background.value.clientHeight
+        left = background.value.scrollLeft
+        top = background.value.scrollTop
+        x = e.screenX
+        y = e.screenY
+      }
+    }
+    const onMouseMove = (e: MouseEvent) => {
+      if (e.ctrlKey) {
+        if (dragging) {
+          const scrollLeft = left - (e.screenX - x)
+          const scrollTop = top - (e.screenY - y)
+          if (scrollLeft > 0 && scrollLeft < scrollWidth - clientWidth) {
+            background.value.scrollLeft = scrollLeft
+          }
+          if (scrollTop > 0 && scrollTop < scrollHeight - clientHeight) {
+            background.value.scrollTop = scrollTop
+          }
+        }
+      } else {
+        dragging = false
+      }
+    }
+    const onMouseUp = (e: MouseEvent) => {
+      if (dragging) {
+        dragging = false
+      }
+    }
+    const onMouseOut = () => {
+      if (dragging) {
+        dragging = false
+      }
+    }
+
     return {
+      background,
+      image,
       scale: computed(() => store.state.scale),
       style,
+      onMouseDown,
+      onMouseMove,
+      onMouseUp,
+      onMouseOut,
     }
   },
   watch: {
@@ -96,7 +166,6 @@ export default defineComponent({
           files.push(item.getAsFile())
         }
       }
-      console.log(files)
       if (files.length > 0) {
         const firstFile = files[0]
         window.electron.ipcRenderer.send('drop-file', firstFile.path)
