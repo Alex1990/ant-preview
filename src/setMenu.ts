@@ -11,13 +11,23 @@ import { getLocaleData, Locale } from './locales'
 let menu: Menu
 let fileOperationMenuItemEnabled = false
 
-export function setMenu(): void {
+interface Options {
+  devtoolsEnabled: boolean
+}
+
+export function setMenu({ devtoolsEnabled }: Options): void {
   const isMac = process.platform === 'darwin'
   const locale = app.getLocale() as Locale
   const localeData = getLocaleData(locale)
 
   const menuItemClick = (item: MenuItem, focusedWindow: BrowserWindow) => {
     focusedWindow.webContents.send('menuItem', item.id)
+  }
+
+  const devtoolsMenuItems = []
+  if (devtoolsEnabled) {
+    devtoolsMenuItems.push({ type: 'separator' })
+    devtoolsMenuItems.push({ role: 'toggleDevtools' })
   }
 
   const template = [
@@ -144,8 +154,7 @@ export function setMenu(): void {
           // 'Shift' means there is a reverse command, so comment the below temporarily
           // accelerator: isMac ? 'Cmd+Shift+H' : 'Ctrl+Shift+H'
         },
-        { type: 'separator' },
-        { role: 'toggleDevtools' },
+        ...devtoolsMenuItems,
       ],
     },
     // { role: 'windowMenu' }

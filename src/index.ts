@@ -9,6 +9,8 @@ import openFileDialog from './utils/openFileDialog'
 // whether you're running in development or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
+const devtoolsEnabled = process.env.NODE_ENV === 'development'
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -24,6 +26,7 @@ const createWindow = async () => {
     width: 800,
     icon: path.resolve(__dirname, 'assets/images/logo_256x256.png'),
     webPreferences: {
+      devTools: devtoolsEnabled,
       nodeIntegration: false,
       contextIsolation: true,
       enableRemoteModule: false,
@@ -49,7 +52,7 @@ const createWindow = async () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  setMenu()
+  setMenu({ devtoolsEnabled })
   createWindow()
 })
 
