@@ -16,6 +16,8 @@
       "resetZoom": "Reset Zoom",
       "zoomOut": "Zoom Out",
       "zoomIn": "Zoom In",
+      "enterFullScreen": "Enter Full Screen",
+      "exitFullScreen": "Exit Full Screen",
       "rotateLeft": "Rotate Left",
       "rotateRight": "Rotate Right",
       "flipVertical": "Flip Vertical",

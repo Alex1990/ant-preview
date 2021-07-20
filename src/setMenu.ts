@@ -10,6 +10,7 @@ import { getLocaleData, Locale } from './locales'
 
 let menu: Menu
 let fileOperationMenuItemEnabled = false
+let template: (MenuItem | MenuItemConstructorOptions)[] = []
 
 interface Options {
   devtoolsEnabled: boolean
@@ -24,17 +25,41 @@ export function setMenu({ devtoolsEnabled }: Options): void {
     focusedWindow.webContents.send('menuItem', item.id)
   }
 
-  const devtoolsMenuItems = []
-  if (devtoolsEnabled) {
-    devtoolsMenuItems.push({ type: 'separator' })
-    devtoolsMenuItems.push({ role: 'toggleDevtools' })
+  let isFullScreen = false;
+  const onFullScreen = (item: MenuItem, focusedWindow: BrowserWindow) => {
+    isFullScreen = !isFullScreen
+    focusedWindow.webContents.send('fullscreenchange', isFullScreen)
+    focusedWindow.setFullScreen(isFullScreen)
+    for (const subMenu of template) {
+      if (subMenu.id === 'view') {
+        for (const menuItem of subMenu.submenu as MenuItemConstructorOptions[]) {
+          if (menuItem.id === 'fullscreen') {
+            if (isFullScreen) {
+              menuItem.label = localeData.menu.view.exitFullScreen
+            } else {
+              menuItem.label = localeData.menu.view.enterFullScreen
+            }
+          }
+        }
+      }
+    }
+    menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+    fileOperationMenuItemEnabled = false
+    enableFileOperationMenuItems()
   }
 
-  const template = [
-    // { role: 'appMenu' }
+  const devtoolsMenuItems: (MenuItem | MenuItemConstructorOptions)[] = []
+  if (devtoolsEnabled) {
+    devtoolsMenuItems.push({ type: 'separator' })
+    devtoolsMenuItems.push({ role: 'toggleDevTools' })
+  }
+
+  template = [
     ...(isMac
       ? [
           {
+            id: 'app',
             label: app.name,
             submenu: [
               { role: 'about' },
@@ -49,9 +74,9 @@ export function setMenu({ devtoolsEnabled }: Options): void {
             ],
           },
         ]
-      : []),
-    // { role: 'fileMenu' }
+      : [] as MenuItemConstructorOptions[]),
     {
+      id: 'file',
       label: localeData.menu.file.name,
       submenu: [
         {
@@ -63,11 +88,11 @@ export function setMenu({ devtoolsEnabled }: Options): void {
           },
         },
         {
-          role: 'recentdocuments',
+          role: 'recentDocuments',
           label: localeData.menu.file.recentFiles.name,
           submenu: [
             {
-              role: 'clearrecentdocuments',
+              role: 'clearRecentDocuments',
               label: localeData.menu.file.recentFiles.clearFiles,
             }
           ]
@@ -90,8 +115,8 @@ export function setMenu({ devtoolsEnabled }: Options): void {
         isMac ? { role: 'close' } : { role: 'quit' },
       ],
     },
-    // { role: 'viewMenu' }
     {
+      id: 'view',
       label: localeData.menu.view.name,
       submenu: [
         {
@@ -122,6 +147,12 @@ export function setMenu({ devtoolsEnabled }: Options): void {
           enabled: fileOperationMenuItemEnabled,
           click: menuItemClick,
           accelerator: isMac ? 'Cmd+Plus' : 'Ctrl+Plus',
+        },
+        {
+          id: 'fullscreen',
+          label: localeData.menu.view.enterFullScreen,
+          enabled: fileOperationMenuItemEnabled,
+          click: onFullScreen,
         },
         { type: 'separator' },
         {
@@ -157,8 +188,8 @@ export function setMenu({ devtoolsEnabled }: Options): void {
         ...devtoolsMenuItems,
       ],
     },
-    // { role: 'windowMenu' }
     {
+      id: 'window',
       label: localeData.menu.window.name,
       submenu: [
         { role: 'minimize' },
@@ -169,11 +200,12 @@ export function setMenu({ devtoolsEnabled }: Options): void {
               { role: 'front' },
               { type: 'separator' },
               { role: 'window' },
-            ]
-          : [{ role: 'close' }]),
+            ] as MenuItemConstructorOptions[]
+          : [{ role: 'close' }] as MenuItemConstructorOptions[]),
       ],
     },
     {
+      id: 'help',
       role: 'help',
       submenu: [
         {
@@ -181,9 +213,9 @@ export function setMenu({ devtoolsEnabled }: Options): void {
         },
       ],
     },
-  ]
+  ] as MenuItemConstructorOptions[]
 
-  menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[])
+  menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 }
 
@@ -193,6 +225,7 @@ const fileOperationMenuItemIds = [
   'resetZoom',
   'zoomOut',
   'zoomIn',
+  'fullscreen',
   'rotateLeft',
   'rotateRight',
   'flipVertical',

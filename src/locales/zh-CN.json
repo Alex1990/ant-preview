@@ -16,6 +16,8 @@
       "resetZoom": "重置缩放",
       "zoomOut": "缩小",
       "zoomIn": "放大",
+      "enterFullScreen": "进入全屏模式",
+      "exitFullScreen": "退出全屏模式",
       "rotateLeft": "向左旋转",
       "rotateRight": "向右旋转",
       "flipVertical": "垂直翻转",
