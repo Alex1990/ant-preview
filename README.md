@@ -44,8 +44,8 @@ A simple image preview with the below formats supported at present.
 * [x] Internationalization
 * [x] Movable toolbar
 * [x] Print
+* [ ] Navigate files of folder
 * [ ] Help document
-* [ ] Multiple files
 * [x] Recent files
 * [x] Support using mouse wheel to zoom
 * [x] Support using drag to move
@@ -54,9 +54,10 @@ A simple image preview with the below formats supported at present.
 
 * [x] App settings panel
 * [ ] Keyboard settings panel
+* [ ] Multiple files
 * [ ] Minimap
 * [ ] Magnifier
-* [ ] Fullscreen mode
+* [x] Fullscreen mode
 * [ ] Slideshow mode
 
 ### Engineering
