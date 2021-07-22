@@ -22,6 +22,7 @@ export interface State {
   scale: [number, number]
   rotate: number
   propertyInfoVisible: boolean
+  dirFiles: string[]
 }
 
 const store = createStore<State>({
@@ -36,6 +37,7 @@ const store = createStore<State>({
     scale: [1, 1],
     rotate: 0,
     propertyInfoVisible: false,
+    dirFiles: [],
   },
   getters: {
     hasFile(state) {
@@ -140,7 +142,10 @@ const store = createStore<State>({
     },
     toggleSettingsVisible(state) {
       state.settingsVisible = !state.settingsVisible
-    }
+    },
+    setDirFiles(state, payload) {
+      state.dirFiles = payload
+    },
   },
 })
 

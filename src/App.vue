@@ -42,6 +42,10 @@ export default defineComponent({
       url.value = URL.createObjectURL(blob)
     })
 
+    window.electron.ipcRenderer.on('dir-files', (files: string[]) => {
+      store.commit('setDirFiles', files)
+    })
+
     const settings = useSettings()
 
     onMounted(() => {

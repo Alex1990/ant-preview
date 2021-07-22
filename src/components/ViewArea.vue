@@ -12,6 +12,7 @@
       @mouseup="onMouseUp"
       @mouseout="onMouseOut"
     />
+    <ArrowNav />
   </div>
   <div v-else class="background" ref="background" @drop="onDrop" @dragover="onDragOver">
     <p class="empty-tip">
@@ -24,8 +25,12 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import micell from 'micell'
+import ArrowNav from './ArrowNav.vue'
 
 export default defineComponent({
+  components: {
+    ArrowNav,
+  },
   props: {
     src: String,
   },
