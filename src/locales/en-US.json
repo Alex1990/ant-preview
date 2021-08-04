@@ -61,5 +61,8 @@
     "title": "Settings",
     "closeBtnTitle": "Close settings",
     "canvasBackgroundColor": "Canvas background color"
+  },
+  "errors": {
+    "unsupportFormat": "Unsupport format"
   }
 }

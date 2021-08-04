@@ -1,8 +1,15 @@
 <template>
-  <ViewArea :src="url" />
-  <StatusBar />
-  <Toolbar />
-  <PropertyInfo />
+  <OpenFailed
+    v-if="openFailedFile"
+    :failed-file="openFailedFile"
+  />
+  <template v-else>
+    <ViewArea :src="url" />
+    <StatusBar />
+    <Toolbar />
+    <PropertyInfo />
+  </template>
+  <ArrowNav v-if="openFailedFile || url" />
   <Settings v-if="settingsVisible" />
 </template>
 
@@ -10,21 +17,25 @@
 import { computed, defineComponent, ref, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useTitle } from '@vueuse/core'
+import OpenFailed from './components/OpenFailed.vue'
 import ViewArea from './components/ViewArea.vue'
 import StatusBar from './components/StatusBar.vue'
 import Toolbar from './components/Toolbar.vue'
 import PropertyInfo from './components/PropertyInfo.vue'
 import Settings from './components/Settings.vue'
+import ArrowNav from './components/ArrowNav.vue'
 import useSettings from './uses/useSettings'
 import { VFile } from './store'
 
 export default defineComponent({
   components: {
+    OpenFailed,
     ViewArea,
     StatusBar,
     Toolbar,
     PropertyInfo,
     Settings,
+    ArrowNav,
   },
   setup() {
     const store = useStore()
@@ -41,6 +52,12 @@ export default defineComponent({
       }
       url.value = URL.createObjectURL(blob)
     })
+
+    window.electron.ipcRenderer.on('open-error', (filePath: string) => {
+      console.log(filePath)
+      store.commit('setOpenFailedFile', filePath)
+    })
+
 
     window.electron.ipcRenderer.on('dir-files', (files: string[]) => {
       store.commit('setDirFiles', files)
@@ -59,6 +76,7 @@ export default defineComponent({
     return {
       url,
       settingsVisible: computed(() => store.state.settingsVisible),
+      openFailedFile: computed(() => store.state.openFailedFile),
     }
   },
 })

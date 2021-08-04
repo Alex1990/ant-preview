@@ -14,6 +14,7 @@ export interface VFile {
 export interface State {
   settingsVisible: boolean
   file?: VFile
+  openFailedFile: string
   width: number
   height: number
   naturalWidth: number
@@ -29,6 +30,7 @@ const store = createStore<State>({
   state: {
     settingsVisible: false,
     file: null,
+    openFailedFile: '',
     width: 0,
     height: 0,
     naturalWidth: 0,
@@ -50,6 +52,7 @@ const store = createStore<State>({
   mutations: {
     reset(state) {
       state.file = null
+      state.openFailedFile = ''
       state.width = 0
       state.height = 0
       state.scale = [1, 1]
@@ -57,6 +60,9 @@ const store = createStore<State>({
     },
     setFile(state, payload) {
       state.file = payload
+    },
+    setOpenFailedFile(state, payload) {
+      state.openFailedFile = payload
     },
     setDimensions(state, { width, height, naturalWidth, naturalHeight }) {
       state.width = width

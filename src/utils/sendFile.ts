@@ -10,10 +10,6 @@ import { enableFileOperationMenuItems } from '../setMenu'
 
 const fsp = fs.promises
 
-function showNotSupportMessage() {
-  dialog.showErrorBox('Unsupported format', 'This extension of the file is not supported.')
-}
-
 export default async function sendFile(win: BrowserWindow, file: string): Promise<void> {
   const buffer = readChunk.sync(file, 0, 4100)
   const fileType = await FileType.fromBuffer(buffer)
@@ -23,7 +19,8 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     mime = fileType.mime
     ext = fileType.ext
     if (!extensions.includes(ext)) {
-      showNotSupportMessage()
+      // TODO: need ipc message data format
+      win.webContents.send('open-error', file)
       return
     }
   }
@@ -34,7 +31,7 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
       mime = 'image/svg+xml'
       ext = 'svg'
     } else {
-      showNotSupportMessage()
+      win.webContents.send('open-error', file)
       return
     }
   }

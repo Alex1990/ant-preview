@@ -34,8 +34,12 @@ export default defineComponent({
   setup() {
     const store = useStore<State>()
     const dirFiles = computed(() => store.state.dirFiles)
-    const dirName = computed(() => dirname(store.state.file.path))
-    const fileName = computed(() => basename(store.state.file.path))
+    const filePath = computed(() => {
+      const { openFailedFile, file } = store.state
+      return openFailedFile ? openFailedFile : file.path
+    })
+    const dirName = computed(() => dirname(filePath.value))
+    const fileName = computed(() => basename(filePath.value))
     const index = computed(() => dirFiles.value.findIndex(v => v === fileName.value))
     const onPrev = () => {
       const prevFileName = dirFiles.value[index.value - 1]
@@ -95,6 +99,7 @@ export default defineComponent({
 }
 
 .arrow-disabled {
-  display: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 </style>
