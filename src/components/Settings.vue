@@ -33,7 +33,8 @@ export default defineComponent({
     const close = () => store.commit('toggleSettingsVisible')
 
     onMounted(() => {
-      document.body.style.background = settings.value.canvasBackgroundColor
+      // TODO: move to App.vue
+      document.body.style.background = (settings.value.canvasBackgroundColor as string) || ''
     })
 
     watch(() => settings.value.canvasBackgroundColor, (color: string) => {

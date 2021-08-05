@@ -1,15 +1,17 @@
-import { Ref } from 'vue'
-import { useStorage } from '@vueuse/core'
+import { ref, watch, Ref } from 'vue'
+import { Settings } from '../types/Settings'
 
-export interface AppSettings {
-  canvasBackgroundColor: string
-}
+export default function useSettings(): Ref<Settings> {
+  const settings = ref({})
 
-const defaultSettings = {
-  canvasBackgroundColor: '#f8f8f8'
-}
+  window.electron.ipcRenderer.settings.get()
+    .then((initialSettings: string) => {
+      settings.value = JSON.parse(initialSettings) as Settings
+    })
+  
+  watch(settings, (val) => {
+    window.electron.ipcRenderer.settings.set(JSON.stringify(val))
+  }, { deep: true })
 
-export default function useSettings(): Ref<AppSettings> {
-  const settings = useStorage('settings', defaultSettings, localStorage)
   return settings
 }
