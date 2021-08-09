@@ -8,10 +8,24 @@ type LocaleData = typeof enUS
 
 type AllLocaleData = Record<Locale, unknown>
 
+interface LocaleOption {
+  value: string
+  label: string
+}
+
 export const locales: AllLocaleData = {
   'en-US': enUS,
   'zh-CN': zhCN
 }
+
+export const localeOptions: LocaleOption[] = []
+
+Object.keys(locales).forEach((localeName)=> {
+  localeOptions.push({
+    value: localeName as string,
+    label: (locales[localeName as keyof AllLocaleData] as LocaleData).name,
+  })
+})
 
 export const defaultLocale = 'en-US'
 

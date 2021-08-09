@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
+import useSettings from '../uses/useSettings'
 import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 
 export default defineComponent({
@@ -16,7 +17,8 @@ export default defineComponent({
     },
   },
   setup() {
-    const localeData = ref(getBrowserLocaleData())
+    const settings = useSettings()
+    const localeData = computed(() => getBrowserLocaleData(settings.value.locale))
     return {
       localeData,
     }

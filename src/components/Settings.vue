@@ -8,6 +8,20 @@
     </div>
     <form class="form">
       <div class="form-item">
+        <label>{{ localeData.settings.locale }}</label>
+        <select
+          v-model="settings.locale"
+        >
+          <option
+            v-for="locale in locales"
+            :key="locale.value"
+            :value="locale.value"
+          >
+            {{ locale.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-item">
         <label>
           {{ localeData.settings.canvasBackgroundColor }}
         </label>
@@ -18,17 +32,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, watch } from 'vue'
+import { computed, defineComponent, onMounted, reactive, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import _ from 'lodash'
+import { Locale, localeOptions } from '../locales/index'
 import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 import useSettings from '../uses/useSettings'
 
+
 export default defineComponent({
   setup() {
+    const locales = ref(localeOptions)
     const settings = useSettings()
     const store = useStore()
-    const localeData = reactive(getBrowserLocaleData())
+    const localeData = computed(() => getBrowserLocaleData(settings.value.locale))
     
     const close = () => store.commit('toggleSettingsVisible')
 
@@ -42,6 +59,7 @@ export default defineComponent({
     })
 
     return {
+      locales,
       localeData,
       settings,
       close,
@@ -117,7 +135,8 @@ export default defineComponent({
   content: ':';
 }
 
-.form-item input {
+.form-item input,
+.form-item select {
   height: 32px;
 }
 </style>

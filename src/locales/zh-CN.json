@@ -1,4 +1,5 @@
 {
+  "name": "中文（中国大陆）",
   "menu": {
     "file": {
       "name": "文件",
@@ -60,7 +61,8 @@
   "settings": {
     "title": "设置",
     "closeBtnTitle": "关闭设置",
-    "canvasBackgroundColor": "画布背景色"
+    "canvasBackgroundColor": "画布背景色",
+    "locale": "语言/区域"
   },
   "errors": {
     "unsupportFormat": "不支持的格式"

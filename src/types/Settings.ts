@@ -1,1 +1,6 @@
-export type Settings = Record<string, unknown>
+import { Locale } from '../locales';
+
+export interface Settings {
+  locale?: Locale
+  canvasBackgroundColor?: string
+}

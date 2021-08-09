@@ -1,4 +1,5 @@
 {
+  "name": "English (United State)",
   "menu": {
     "file": {
       "name": "File",
@@ -60,7 +61,8 @@
   "settings": {
     "title": "Settings",
     "closeBtnTitle": "Close settings",
-    "canvasBackgroundColor": "Canvas background color"
+    "canvasBackgroundColor": "Canvas background color",
+    "locale": "Language/Locale"
   },
   "errors": {
     "unsupportFormat": "Unsupport format"

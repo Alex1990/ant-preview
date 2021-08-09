@@ -10,10 +10,11 @@ const settingsDir = path.join(os.homedir(), `.${pkg.name}`)
 const settingsFile = path.join(settingsDir, 'settings.json')
 
 const defaultSettings: Settings = {
+  locale: 'en-US',
   canvasBackgroundColor: '#f8f8f8'
 }
 
-let settings = ''
+export let settings = ''
 
 try {
   fs.accessSync(settingsDir)
@@ -24,7 +25,12 @@ try {
 try {
   const content = fs.readFileSync(settingsFile, 'utf8')
   if (content) {
-    settings = content
+    const obj = JSON.parse(content)
+    const settingsObj = {
+      ...defaultSettings,
+      ...obj,
+    }
+    settings = JSON.stringify(settingsObj)
   } else {
     settings = JSON.stringify(defaultSettings)
     fs.writeFileSync(settingsFile, settings)
@@ -36,7 +42,15 @@ try {
 
 export async function get(): Promise<string> {
   try {
-    settings = await fsp.readFile(settingsFile, 'utf8')
+    const content = await fsp.readFile(settingsFile, 'utf8')
+    if (content) {
+      const obj = JSON.parse(content)
+      const settingsObj = {
+        ...defaultSettings,
+        ...obj,
+      }
+      settings = JSON.stringify(settingsObj)
+    }
   } catch (err) {
     settings = JSON.stringify(defaultSettings)
     await fsp.writeFile(settingsFile, settings, 'utf8')
@@ -47,4 +61,9 @@ export async function get(): Promise<string> {
 export async function set(newVal: string): Promise<void> {
   settings = newVal
   await fsp.writeFile(settingsFile, settings, 'utf8')
+}
+
+export async function getSettings(): Promise<Settings> {
+  const settingsStr = await get()
+  return JSON.parse(settingsStr)
 }
