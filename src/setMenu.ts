@@ -62,17 +62,35 @@ export async function setMenu({ devtoolsEnabled }: Options): Promise<void> {
       ? [
           {
             id: 'app',
-            label: app.name,
+            label: localeData.menu.app.name,
             submenu: [
-              { role: 'about' },
+              {
+                role: 'about',
+                label: localeData.menu.app.about,
+              },
               { type: 'separator' },
-              { role: 'services' },
+              {
+                role: 'services',
+                label: localeData.menu.app.services,
+              },
               { type: 'separator' },
-              { role: 'hide' },
-              { role: 'hideothers' },
-              { role: 'unhide' },
+              {
+                role: 'hide',
+                label: localeData.menu.app.hide,
+              },
+              {
+                role: 'hideothers',
+                label: localeData.menu.app.hideothers,
+              },
+              {
+                role: 'unhide',
+                label: localeData.menu.app.unhide,
+              },
               { type: 'separator' },
-              { role: 'quit' },
+              {
+                role: 'quit',
+                label: localeData.menu.app.quit,
+              },
             ],
           },
         ]
@@ -114,7 +132,13 @@ export async function setMenu({ devtoolsEnabled }: Options): Promise<void> {
           click: menuItemClick,
         },
         { type: 'separator' },
-        isMac ? { role: 'close' } : { role: 'quit' },
+        isMac ? {
+          role: 'close',
+          label: localeData.menu.file.close,
+        } : {
+          role: 'quit',
+          label: localeData.menu.file.quit,
+        },
       ],
     },
     {
@@ -194,21 +218,34 @@ export async function setMenu({ devtoolsEnabled }: Options): Promise<void> {
       id: 'window',
       label: localeData.menu.window.name,
       submenu: [
-        { role: 'minimize' },
-        { role: 'zoom' },
+        {
+          role: 'minimize',
+          label: localeData.menu.window.minimize,
+        },
+        {
+          role: 'zoom',
+          label: localeData.menu.window.zoom,
+        },
         ...(isMac
           ? [
               { type: 'separator' },
-              { role: 'front' },
+              {
+                role: 'front',
+                label: localeData.menu.window.front,
+              },
               { type: 'separator' },
-              { role: 'window' },
             ] as MenuItemConstructorOptions[]
-          : [{ role: 'close' }] as MenuItemConstructorOptions[]),
+          : [
+            {
+              role: 'close',
+              label: localeData.menu.window.close,
+            }
+          ] as MenuItemConstructorOptions[]),
       ],
     },
     {
       id: 'help',
-      role: 'help',
+      label: localeData.menu.help.name,
       submenu: [
         {
           label: localeData.menu.help.learn,

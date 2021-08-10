@@ -1,6 +1,15 @@
 {
   "name": "中文（中国大陆）",
   "menu": {
+    "app": {
+      "name": "蚂蚁看图",
+      "about": "关于蚂蚁看图",
+      "services": "服务",
+      "hide": "隐藏蚂蚁看图",
+      "hideothers": "隐藏其他应用",
+      "unhide": "显示所有应用",
+      "quit": "退出"
+    },
     "file": {
       "name": "文件",
       "openFile": "打开文件",
@@ -9,7 +18,9 @@
         "clearFiles": "清除文件"
       },
       "print": "打印...",
-      "settings": "设置"
+      "settings": "设置",
+      "close": "关闭",
+      "quit": "退出"
     },
     "view": {
       "name": "查看",
@@ -25,7 +36,11 @@
       "flipHorizontal": "水平翻转"
     },
     "window": {
-      "name": "窗口"
+      "name": "窗口",
+      "minimize": "最小化",
+      "zoom": "缩放",
+      "front": "所有窗口置前",
+      "close": "关闭"
     },
     "help": {
       "name": "帮助",

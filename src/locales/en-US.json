@@ -1,6 +1,15 @@
 {
   "name": "English (United State)",
   "menu": {
+    "app": {
+      "name": "Ant Preview",
+      "about": "About Ant Preview",
+      "services": "Services",
+      "hide": "Hide Ant Preview",
+      "hideothers": "Hide Others",
+      "unhide": "Show All",
+      "quit": "Quit"
+    },
     "file": {
       "name": "File",
       "openFile": "Open File",
@@ -9,7 +18,9 @@
         "clearFiles": "Clear Files"
       },
       "print": "Print...",
-      "settings": "Settings"
+      "settings": "Settings",
+      "close": "Close",
+      "quit": "Quit"
     },
     "view": {
       "name": "View",
@@ -25,7 +36,11 @@
       "flipHorizontal": "Flip Horizontal"
     },
     "window": {
-      "name": "Window"
+      "name": "Window",
+      "minimize": "Minimize",
+      "zoom": "Zoom",
+      "front": "Bring All to Front",
+      "close": "Close"
     },
     "help": {
       "name": "Help",
