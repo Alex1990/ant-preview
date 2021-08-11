@@ -77,7 +77,45 @@
     "title": "设置",
     "closeBtnTitle": "关闭设置",
     "canvasBackgroundColor": "画布背景色",
-    "locale": "语言/区域"
+    "locale": "语言/区域",
+    "sortBy": "文件排序依据",
+    "sortByOptions": [
+      {
+        "value": "fileName",
+        "label": "文件名"
+      },
+      {
+        "value": "extName",
+        "label": "文件后缀"
+      },
+      {
+        "value": "size",
+        "label": "文件大小"
+      },
+      {
+        "value": "ctime",
+        "label": "创建时间"
+      },
+      {
+        "value": "mtime",
+        "label": "上次修改时间"
+      },
+      {
+        "value": "atime",
+        "label": "上次访问时间"
+      }
+    ],
+    "sortType": "排序类型",
+    "sortTypeOptions": [
+      {
+        "value": "asc",
+        "label": "升序"
+      },
+      {
+        "value": "desc",
+        "label": "降序"
+      }
+    ]
   },
   "errors": {
     "unsupportFormat": "不支持的格式"

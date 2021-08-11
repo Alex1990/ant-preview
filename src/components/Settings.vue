@@ -27,20 +27,56 @@
         </label>
         <input type="color" v-model="settings.canvasBackgroundColor" />
       </div>
+      <div class="form-item">
+        <label>{{ localeData.settings.sortBy }}</label>
+        <select
+          v-model="settings.sortBy"
+        >
+          <option
+            v-for="option in localeData.settings.sortByOptions"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-item">
+        <label>
+          {{ localeData.settings.sortType }}
+        </label>
+        <div>
+          <Radio
+            v-for="option in localeData.settings.sortTypeOptions"
+            :key="option.value"
+            :value="option.value"
+            :checked="option.value === settings.sortType"
+            name="sortType"
+            @change="onSortTypeChange"
+          >
+            {{ option.label }}
+          </Radio>
+        </div>
+      </div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import _ from 'lodash'
-import { Locale, localeOptions } from '../locales/index'
+import { localeOptions } from '../locales/index'
 import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 import useSettings from '../uses/useSettings'
+import { SortType } from '../types/Settings'
+import Radio from './Radio.vue'
 
 
 export default defineComponent({
+  components: {
+    Radio,
+  },
   setup() {
     const locales = ref(localeOptions)
     const settings = useSettings()
@@ -58,11 +94,18 @@ export default defineComponent({
       document.body.style.background = color
     })
 
+    const onSortTypeChange = (checked: boolean, value: SortType) => {
+      if (checked) {
+        settings.value.sortType = value
+      }
+    }
+
     return {
       locales,
       localeData,
       settings,
       close,
+      onSortTypeChange,
     }
   },
 })
@@ -122,7 +165,7 @@ export default defineComponent({
   margin-bottom: 16px;
 }
 
-.form-item label {
+.form-item > label {
   margin-right: 32px;
   display: block;
   width: 240px;
@@ -131,7 +174,7 @@ export default defineComponent({
   text-align: right;
 }
 
-.form-item label::after {
+.form-item > label::after {
   content: ':';
 }
 

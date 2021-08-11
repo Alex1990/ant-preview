@@ -2,7 +2,7 @@ import { ref, watch, Ref } from 'vue'
 import { Settings } from '../types/Settings'
 
 export default function useSettings(): Ref<Settings> {
-  const settings = ref({})
+  const settings = ref({} as Settings)
 
   window.electron.ipcRenderer.settings.get()
     .then((initialSettings: string) => {

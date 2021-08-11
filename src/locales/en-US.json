@@ -77,7 +77,45 @@
     "title": "Settings",
     "closeBtnTitle": "Close settings",
     "canvasBackgroundColor": "Canvas background color",
-    "locale": "Language/Locale"
+    "locale": "Language/Locale",
+    "sortBy": "Files sort by",
+    "sortByOptions": [
+      {
+        "value": "fileName",
+        "label": "File name"
+      },
+      {
+        "value": "extName",
+        "label": "File extension"
+      },
+      {
+        "value": "size",
+        "label": "File size"
+      },
+      {
+        "value": "ctime",
+        "label": "Created time"
+      },
+      {
+        "value": "mtime",
+        "label": "Last modified time"
+      },
+      {
+        "value": "atime",
+        "label": "Last accessed time"
+      }
+    ],
+    "sortType": "Sort type",
+    "sortTypeOptions": [
+      {
+        "value": "asc",
+        "label": "Ascend"
+      },
+      {
+        "value": "desc",
+        "label": "Descend"
+      }
+    ]
   },
   "errors": {
     "unsupportFormat": "Unsupport format"

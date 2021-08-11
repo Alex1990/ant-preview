@@ -1,5 +1,6 @@
 import { Stats } from 'fs'
 import { createStore } from 'vuex'
+import { DirFile } from '../types'
 
 export interface VFile {
   path: string
@@ -23,7 +24,7 @@ export interface State {
   scale: [number, number]
   rotate: number
   propertyInfoVisible: boolean
-  dirFiles: string[]
+  dirFiles: DirFile[]
 }
 
 const store = createStore<State>({

@@ -22,10 +22,12 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
+import _ from 'lodash'
 import basename from 'micell/path/basename'
 import dirname from 'micell/path/dirname'
-import Icon from './Icon.vue'
 import { State } from '../store/index'
+import useSettings from '../uses/useSettings'
+import Icon from './Icon.vue'
 
 export default defineComponent({
   components: {
@@ -33,20 +35,23 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<State>()
-    const dirFiles = computed(() => store.state.dirFiles)
+    const settings = useSettings()
+    const dirFiles = computed(() => {
+      return _.orderBy(store.state.dirFiles, [settings.value.sortBy], [settings.value.sortType])
+    })
     const filePath = computed(() => {
       const { openFailedFile, file } = store.state
       return openFailedFile ? openFailedFile : file.path
     })
     const dirName = computed(() => dirname(filePath.value))
     const fileName = computed(() => basename(filePath.value))
-    const index = computed(() => dirFiles.value.findIndex(v => v === fileName.value))
+    const index = computed(() => dirFiles.value.findIndex(v => v.fileName === fileName.value))
     const onPrev = () => {
-      const prevFileName = dirFiles.value[index.value - 1]
+      const prevFileName = dirFiles.value[index.value - 1].fileName
       window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${prevFileName}`)
     }
     const onNext = () => {
-      const nextFileName = dirFiles.value[index.value + 1]
+      const nextFileName = dirFiles.value[index.value + 1].fileName
       window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${nextFileName}`)
     }
     return {

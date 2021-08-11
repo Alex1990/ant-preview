@@ -26,6 +26,7 @@ import Settings from './components/Settings.vue'
 import ArrowNav from './components/ArrowNav.vue'
 import useSettings from './uses/useSettings'
 import { VFile } from './store'
+import { DirFile } from './types'
 
 export default defineComponent({
   components: {
@@ -59,7 +60,7 @@ export default defineComponent({
     })
 
 
-    window.electron.ipcRenderer.on('dir-files', (files: string[]) => {
+    window.electron.ipcRenderer.on('dir-files', (files: DirFile[]) => {
       store.commit('setDirFiles', files)
     })
 

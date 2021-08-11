@@ -11,7 +11,9 @@ const settingsFile = path.join(settingsDir, 'settings.json')
 
 const defaultSettings: Settings = {
   locale: 'en-US',
-  canvasBackgroundColor: '#f8f8f8'
+  canvasBackgroundColor: '#f8f8f8',
+  sortBy: 'fileName',
+  sortType: 'asc',
 }
 
 export let settings = ''
