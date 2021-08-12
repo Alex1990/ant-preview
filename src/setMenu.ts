@@ -142,6 +142,24 @@ export async function setMenu({ devtoolsEnabled }: Options): Promise<void> {
       ],
     },
     {
+      id: 'navigation',
+      label: localeData.menu.navigation.name,
+      submenu: [
+        {
+          id: 'prev',
+          label: localeData.menu.navigation.prev,
+          accelerator: 'Left',
+          click: menuItemClick,
+        },
+        {
+          id: 'next',
+          label: localeData.menu.navigation.next,
+          accelerator: 'Right',
+          click: menuItemClick,
+        },
+      ],
+    },
+    {
       id: 'view',
       label: localeData.menu.view.name,
       submenu: [

@@ -66,7 +66,7 @@ const handleCommand = (store: Store<State>, name: string) => {
       store.commit('toggleSettingsVisible')
       break
     default:
-      console.error('unknown command')
+      break
   }
 }
 

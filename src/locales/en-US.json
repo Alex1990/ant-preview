@@ -22,6 +22,11 @@
       "close": "Close",
       "quit": "Quit"
     },
+    "navigation": {
+      "name": "Navigation",
+      "prev": "Previous Image",
+      "next": "Next Image"
+    },
     "view": {
       "name": "View",
       "propertyInfo": "Show property",

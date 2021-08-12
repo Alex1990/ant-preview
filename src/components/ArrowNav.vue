@@ -47,13 +47,27 @@ export default defineComponent({
     const fileName = computed(() => basename(filePath.value))
     const index = computed(() => dirFiles.value.findIndex(v => v.fileName === fileName.value))
     const onPrev = () => {
-      const prevFileName = dirFiles.value[index.value - 1].fileName
-      window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${prevFileName}`)
+      if (index.value > 0) {
+        const prevFileName = dirFiles.value[index.value - 1].fileName
+        window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${prevFileName}`)
+      }
     }
     const onNext = () => {
-      const nextFileName = dirFiles.value[index.value + 1].fileName
-      window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${nextFileName}`)
+      if (index.value < dirFiles.value.length - 1) {
+        const nextFileName = dirFiles.value[index.value + 1].fileName
+        window.electron.ipcRenderer.send('nav-file', `${dirName.value}/${nextFileName}`)
+      }
     }
+
+    window.electron.ipcRenderer.on('menuItem', (id: string) => {
+      if (id === 'prev') {
+        onPrev()
+      }
+      if (id === 'next') {
+        onNext()
+      }
+    })
+
     return {
       prevDisabled: computed(() => index.value === 0),
       nextDisabled: computed(() => index.value === dirFiles.value.length - 1),
