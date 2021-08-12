@@ -55,7 +55,6 @@ export default defineComponent({
     })
 
     window.electron.ipcRenderer.on('open-error', (filePath: string) => {
-      console.log(filePath)
       store.commit('setOpenFailedFile', filePath)
     })
 

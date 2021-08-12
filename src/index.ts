@@ -1,5 +1,6 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain, IpcMainEvent } from 'electron'
+import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { setMenu } from './setMenu'
 import sendFile from './utils/sendFile'
 import openFileDialog from './utils/openFileDialog'
@@ -58,9 +59,22 @@ const createWindow = async () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', () => {
+app.on('ready', async () => {
   setMenu({ devtoolsEnabled })
   createWindow()
+  if (devtoolsEnabled) {
+    try {
+      const name = await installExtension(VUEJS3_DEVTOOLS, {
+        loadExtensionOptions: {
+          allowFileAccess: true,
+        },
+        forceDownload: false,
+      })
+      console.log('devtools extension installed:', name)
+    } catch (err) {
+      console.log('devtools extension install failed:', err)
+    }
+  }
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

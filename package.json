@@ -97,6 +97,7 @@
     "@vue/compiler-sfc": "^3.0.11",
     "css-loader": "^5.0.0",
     "electron": "12.0.9",
+    "electron-devtools-installer": "git+https://github.com/MarshallOfSound/electron-devtools-installer.git",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.20.0",
     "file-loader": "^6.2.0",
