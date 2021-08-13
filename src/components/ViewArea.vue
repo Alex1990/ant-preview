@@ -4,6 +4,7 @@
       v-if="src"
       :src="src"
       class="image"
+      :class="cls"
       :style="style"
       ref="image"
       @load="onLoad"
@@ -21,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { watch, computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import micell from 'micell'
 
@@ -33,6 +34,12 @@ export default defineComponent({
     const background = ref(null)
     const image = ref(null)
     const store = useStore()
+    const cls = ref('')
+
+    watch(() => props.src, () => {
+      cls.value = ''
+    })
+
     const style = computed(() => {
       const { naturalWidth, naturalHeight, scale, rotate } = store.state
       const [x, y] = scale
@@ -43,6 +50,17 @@ export default defineComponent({
         height: `${ratio * naturalHeight}px`,
       }
     })
+
+    const onLoad = () => {
+      cls.value = 'show'
+      const { width, height } = micell.dom.viewport(background.value)
+      const { naturalWidth, naturalHeight } = image.value
+      const hRatio = width / naturalWidth
+      const vRatio = height / naturalHeight
+      const ratio = hRatio < vRatio ? hRatio : vRatio
+      store.commit('setScale', [ratio, ratio])
+      store.commit('setDimensions', { width, height, naturalWidth, naturalHeight })
+    }
 
     const onWheel = (e: WheelEvent) => {
       if (props.src && e.ctrlKey) {
@@ -112,8 +130,10 @@ export default defineComponent({
     return {
       background,
       image,
+      cls,
       scale: computed(() => store.state.scale),
       style,
+      onLoad,
       onMouseDown,
       onMouseMove,
       onMouseUp,
@@ -148,15 +168,6 @@ export default defineComponent({
     }
   },
   methods: {
-    onLoad() {
-      const { width, height } = micell.dom.viewport(this.$refs.background)
-      const { naturalWidth, naturalHeight } = this.$refs.image
-      const hRatio = width / naturalWidth
-      const vRatio = height / naturalHeight
-      const ratio = hRatio < vRatio ? hRatio : vRatio
-      this.$store.commit('setScale', [ratio, ratio])
-      this.$store.commit('setDimensions', { width, height, naturalWidth, naturalHeight })
-    },
     onDrop(e: DragEvent) {
       e.preventDefault()
       const files = []
@@ -188,6 +199,12 @@ export default defineComponent({
 
 .image {
   margin: auto;
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity .15s ease-in;
 }
 
 .empty-tip {

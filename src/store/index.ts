@@ -56,7 +56,7 @@ const store = createStore<State>({
       state.openFailedFile = ''
       state.width = 0
       state.height = 0
-      state.scale = [1, 1]
+      state.scale = [0.01, 0.01]
       state.rotate = 0
     },
     setFile(state, payload) {
