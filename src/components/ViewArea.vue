@@ -16,7 +16,7 @@
   </div>
   <div v-else class="background" ref="background" @drop="onDrop" @dragover="onDragOver">
     <p class="empty-tip">
-      You can drap and drop file to here.
+      {{ localeData.tips.empty }}
     </p>
   </div>
 </template>
@@ -25,12 +25,16 @@
 import { watch, computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import micell from 'micell'
+import useSettings from '../uses/useSettings'
+import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 
 export default defineComponent({
   props: {
     src: String,
   },
   setup(props) {
+    const settings = useSettings()
+    const localeData = computed(() => getBrowserLocaleData(settings.value.locale))
     const background = ref(null)
     const image = ref(null)
     const store = useStore()
@@ -128,6 +132,7 @@ export default defineComponent({
     }
 
     return {
+      localeData,
       background,
       image,
       cls,

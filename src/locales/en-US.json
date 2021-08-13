@@ -122,6 +122,9 @@
       }
     ]
   },
+  "tips": {
+    "empty": "You can drap and drop file to here."
+  },
   "errors": {
     "unsupportFormat": "Unsupport format"
   }

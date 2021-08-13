@@ -122,6 +122,9 @@
       }
     ]
   },
+  "tips": {
+    "empty": "你可以拖拽文件到这里"
+  },
   "errors": {
     "unsupportFormat": "不支持的格式"
   }

@@ -1,4 +1,4 @@
-import { ref, Ref, computed } from 'vue'
+import { Ref, computed } from 'vue'
 import useSettings from '../uses/useSettings'
 import { getBrowserLocaleData } from '../utils/getBrowserLocaleData'
 
