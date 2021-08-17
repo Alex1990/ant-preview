@@ -2,17 +2,21 @@
   <div class="arrow-nav">
     <button
       class="arrow-btn arrow-prev"
-      :class="{['arrow-disabled']: prevDisabled }"
+      :class="{['arrow-disabled']: prevDisabled, ['arrow-hidden']: prevHidden}"
       type="button"
       @click="onPrev"
+      @mouseenter="onPrevMouseEnter"
+      @mouseleave="onPrevMouseLeave"
     >
       <Icon name="arrow-left" />
     </button>
     <button
       class="arrow-btn arrow-next"
-      :class="{['arrow-disabled']: nextDisabled }"
+      :class="{['arrow-disabled']: nextDisabled, ['arrow-hidden']: nextHidden}"
       type="button"
       @click="onNext"
+      @mouseenter="onNextMouseEnter"
+      @mouseleave="onNextMouseLeave"
     >
       <Icon name="arrow-right" />
     </button>
@@ -20,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import _ from 'lodash'
 import basename from 'micell/path/basename'
@@ -68,11 +72,33 @@ export default defineComponent({
       }
     })
 
+    const prevHidden = ref(true)
+    const onPrevMouseEnter = () => {
+      prevHidden.value = false;
+    }
+    const onPrevMouseLeave = () => {
+      prevHidden.value = true;
+    }
+
+    const nextHidden = ref(true)
+    const onNextMouseEnter = () => {
+      nextHidden.value = false;
+    }
+    const onNextMouseLeave = () => {
+      nextHidden.value = true;
+    }
+
     return {
       prevDisabled: computed(() => index.value === 0),
       nextDisabled: computed(() => index.value === dirFiles.value.length - 1),
+      prevHidden,
+      nextHidden,
       onPrev,
       onNext,
+      onPrevMouseEnter,
+      onPrevMouseLeave,
+      onNextMouseEnter,
+      onNextMouseLeave,
     }
   },
 })
@@ -101,7 +127,7 @@ export default defineComponent({
   height: 64px;
   font-size: 36px;
   background: rgba(0,0,0,.6);
-  opacity: 0.3;
+  opacity: 0.7;
   border: 0;
   border-radius: 32px;
   color: #fff;
@@ -112,8 +138,8 @@ export default defineComponent({
   transition: all 0.2s ease-out;
 }
 
-.arrow-btn:hover {
-  opacity: 0.7;
+.arrow-hidden {
+  opacity: 0;
   transition: all 0.2s ease-in;
 }
 
