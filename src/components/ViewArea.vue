@@ -66,6 +66,16 @@ export default defineComponent({
       store.commit('setDimensions', { width, height, naturalWidth, naturalHeight })
     }
 
+    const onResize = () => {
+      const { width, height } = micell.dom.viewport(background.value)
+      const { naturalWidth, naturalHeight } = image.value
+      const hRatio = width / naturalWidth
+      const vRatio = height / naturalHeight
+      const ratio = hRatio < vRatio ? hRatio : vRatio
+      store.commit('setScale', [ratio, ratio])
+      store.commit('setDimensions', { width, height, naturalWidth, naturalHeight })
+    }
+
     const onWheel = (e: WheelEvent) => {
       if (props.src && e.ctrlKey) {
         if (e.deltaY > 0) {
@@ -76,9 +86,11 @@ export default defineComponent({
       }
     }
     onMounted(() => {
+      window.addEventListener('resize', onResize)
       document.addEventListener('mousewheel', onWheel)
     })
     onBeforeUnmount(() => {
+      window.removeEventListener('resize', onResize)
       document.removeEventListener('mousewheel', onWheel)
     })
 
