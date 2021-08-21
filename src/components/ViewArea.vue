@@ -67,6 +67,7 @@ export default defineComponent({
     }
 
     const onResize = () => {
+      if (!props.src) return
       const { width, height } = micell.dom.viewport(background.value)
       const { naturalWidth, naturalHeight } = image.value
       const hRatio = width / naturalWidth
