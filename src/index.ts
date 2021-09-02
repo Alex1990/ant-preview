@@ -18,7 +18,12 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-let file = process.argv[1] || ''
+let file = ''
+
+if (process.platform === 'win32') {
+  file = process.argv[1] || ''
+}
+
 let mainWindow: BrowserWindow
 
 const createWindow = async () => {
