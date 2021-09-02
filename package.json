@@ -122,6 +122,7 @@
     "pretty-bytes": "^5.6.0",
     "read-chunk": "^3.2.0",
     "vue": "^3.0.11",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "winston": "git+ssh://git@github.com:Alex1990/winston.git#0d17a8d098c390118f58b60383712448adfac014"
   }
 }
