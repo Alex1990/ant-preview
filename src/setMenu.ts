@@ -8,6 +8,7 @@ import {
 import openFileDialog from './utils/openFileDialog'
 import { getSettings } from './utils/settings'
 import { getLocaleData, Locale } from './locales'
+import logger from './utils/logger'
 
 let menu: Menu
 let fileOperationMenuItemEnabled = false
@@ -22,6 +23,8 @@ export async function setMenu({ devtoolsEnabled }: Options): Promise<void> {
   const locale = app.getLocale() as Locale
   const settings = await getSettings()
   const localeData = getLocaleData(settings.locale || locale)
+
+  logger.log('info', `setMenu: ${settings.locale || locale}`)
 
   const menuItemClick = (item: MenuItem, focusedWindow: BrowserWindow) => {
     focusedWindow.webContents.send('menuItem', item.id)

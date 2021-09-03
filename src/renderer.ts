@@ -34,6 +34,9 @@ import App from './App.vue'
 import store from './store/'
 
 const app = createApp({
+  mounted() {
+    window.electron.ipcRenderer.logger('info', 'app mounted')
+  },
   render() {
     return h(App)
   },

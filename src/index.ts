@@ -45,7 +45,8 @@ const createWindow = async () => {
   });
 
   // and load the index.html of the app.
-  await mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  await mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+  logger.log('info', 'index html loaded')
 
   if (file) {
     sendFile(mainWindow, file)
@@ -54,11 +55,13 @@ const createWindow = async () => {
   }
 
   ipcMain.on('drop-file', (e: IpcMainEvent, file: string) => {
+    logger.log('info', `drop-file: ${file}`)
     sendFile(mainWindow, file)
     sendDirFiles(mainWindow, file)
   })
 
   ipcMain.on('nav-file', (e: IpcMainEvent, file: string) => {
+    logger.log('info', `nav-file: ${file}`)
     sendFile(mainWindow, file)
     sendDirFiles(mainWindow, file)
   })
@@ -68,6 +71,7 @@ const createWindow = async () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
+  logger.log('info', 'app ready')
   setMenu({ devtoolsEnabled })
   createWindow()
   if (devtoolsEnabled) {
@@ -103,6 +107,7 @@ app.on('activate', () => {
 });
 
 app.on('open-file', (e: Event, filePath: string) => {
+  logger.log('info', `open-file event: ${filePath}`)
   e.preventDefault()
   // On Windows, you have to parse process.argv (in the main process) to get the filepath.
   // https://www.electronjs.org/docs/api/app#event-open-file-macos

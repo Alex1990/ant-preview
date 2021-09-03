@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import fs from 'fs'
 import path from 'path'
 import readChunk from 'read-chunk'
@@ -7,6 +7,7 @@ import isSvg from 'is-svg'
 import exifr from 'exifr'
 import extensions from './extensions'
 import { enableFileOperationMenuItems } from '../setMenu'
+import logger from './logger'
 
 const fsp = fs.promises
 
@@ -21,6 +22,7 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     if (!extensions.includes(ext)) {
       // TODO: need ipc message data format
       win.webContents.send('open-error', file)
+      logger.log('info', `file open error: ${file}`)
       return
     }
   }
@@ -32,6 +34,7 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
       ext = 'svg'
     } else {
       win.webContents.send('open-error', file)
+      logger.log('info', `file open error: ${file}`)
       return
     }
   }
@@ -47,6 +50,9 @@ export default async function sendFile(win: BrowserWindow, file: string): Promis
     stats,
     meta,
   })
+
+  logger.log('info', `send file: ${file}, mime: ${mime}`)
+
   enableFileOperationMenuItems()
   app.addRecentDocument(file)
 }

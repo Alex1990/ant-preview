@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { DirFile } from '../types'
 import isSupportExtension from './isSupportExtension'
+import logger from './logger'
 
 const fsp = fs.promises
 
@@ -13,6 +14,9 @@ export default async function sendDirFiles(win: BrowserWindow, file: string): Pr
   if (dir !== lastDir) {
     lastDir = dir
     const files = await fsp.readdir(dir)
+
+    logger.log('info', `read dir: ${dir}, file count: ${files.length}`)
+
     const filteredFiles = files.filter(file => {
       let extname = path.extname(file)
       if (extname) extname = extname.slice(1)
@@ -59,6 +63,9 @@ export default async function sendDirFiles(win: BrowserWindow, file: string): Pr
         })
       }
     }
+
     win.webContents.send('dir-files', fileList)
+
+    logger.log('info', `send dir file count: ${fileList.length}`)
   }
 }

@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron'
+import logger from './utils/logger'
 import { get, set } from './utils/settings'
 
 contextBridge.exposeInMainWorld('electron', {
@@ -14,6 +15,9 @@ contextBridge.exposeInMainWorld('electron', {
     settings: {
       get,
       set,
+    },
+    logger: function (level: string, message: string) {
+      logger.log(level, message)
     },
   },
 })
