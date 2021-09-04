@@ -6,8 +6,9 @@ import { Settings } from '../types/Settings'
 
 const fsp = fs.promises
 
-const settingsDir = path.join(os.homedir(), `.${pkg.name}`)
-const settingsFile = path.join(settingsDir, 'settings.json')
+export const settingsDir = path.join(os.homedir(), `.${pkg.name}`)
+
+export const settingsFile = path.join(settingsDir, 'settings.json')
 
 const defaultSettings: Settings = {
   locale: 'en-US',
